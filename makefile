@@ -1,20 +1,26 @@
-NAME = TBD
+NAME = my_neuralNetwork
 
 CFLAGS = -W -Wall -Wextra
 
-SRC = $(wildcard ./src/*.c) \
-		$(wildcard ./src/func/*.c) \
-			$(wildcard ./src/libs/*.c)
+LIBS = -l$(NAME) -lmy_math -lmy_matrix
+
+SRC = $(wildcard ./src/*.c)
+
+LIB_SRC = $(wildcard ./src/func/*.c)
+
+LIB_OBJ = $(LIB_SRC:.c=.o)
 
 OBJ = $(SRC:.c=.o)
 
-all: build clean
+all: archive build clean
+
+archive: $(LIB_OBJ)
+	ar -rcs "C:\Users\ADMIN\Code\my_libs\lib"$(NAME).a $(LIB_OBJ)
 
 build: $(OBJ)
 	@if not exist "./out" mkdir "./out"
-	@gcc $(CFLAGS) $(OBJ) -o ./out/$(NAME)
+	@gcc $(CFLAGS) $(OBJ) -L"C:\Users\ADMIN\Code\my_libs" $(LIBS) -o ./out/$(NAME)
 
 clean:
 	@if exist ./src/*.o del /Q src\*.o
 	@if exist ./src/func/*.o del /Q src\func\*.o
-	@if exist ./src/libs/*.o del /Q src\libs\*.o
