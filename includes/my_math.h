@@ -19,6 +19,7 @@ static inline __attribute__((always_inline)) void swap(double *a, double *b)
     *b = temp;
 }
 
+
 double dot_product(double* a, double* b, unsigned int size);
 double my_power(double x, unsigned int n);
 int my_randint(int minN, int maxN);

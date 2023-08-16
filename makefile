@@ -15,11 +15,11 @@ OBJ = $(SRC:.c=.o)
 all: archive build clean
 
 archive: $(LIB_OBJ)
-	ar -rcs "C:\Users\ADMIN\Code\my_libs\lib"$(NAME).a $(LIB_OBJ)
+	ar -rcs C:\Users\ADMIN\Code\my_libs\lib$(NAME).a $(LIB_OBJ)
 
 build: $(OBJ)
 	@if not exist "./out" mkdir "./out"
-	@gcc $(CFLAGS) $(OBJ) -L"C:\Users\ADMIN\Code\my_libs" $(LIBS) -o ./out/$(NAME)
+	@gcc $(CFLAGS) $(OBJ) -LC:\Users\ADMIN\Code\my_libs $(LIBS) -o ./out/$(NAME)
 
 clean:
 	@if exist ./src/*.o del /Q src\*.o
