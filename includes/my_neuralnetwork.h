@@ -9,3 +9,6 @@ typedef struct my_nn {
     uint8_t *layers;
     uint8_t layers_size;
 } my_nn_t;
+
+void my_nn_create(my_nn_t *N, uint8_t *layers, \
+    const uint8_t layers_size);
