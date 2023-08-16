@@ -1,4 +1,4 @@
-NAME = my_neuralNetwork
+NAME = my_neuralnetwork
 
 CFLAGS = -W -Wall -Wextra
 
