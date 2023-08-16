@@ -1,6 +1,6 @@
 #include "../../includes/my.h"
 
-static void create_arrElement(my_matrix_t *A, unsigned int m, unsigned int n)
+static void create_arrelement(my_matrix_t *A, unsigned int m, unsigned int n)
 {
     unsigned int i;
 
@@ -33,9 +33,10 @@ void my_nn_create(my_nn_t *N, uint8_t layers[], \
     }
     for (i = 1; i < layers_size; i++) {
         uint8_t n = layers[i];
-        create_arrElement(&(N->theta_arr[i - 1]), m, n);
-        create_arrElement(&(N->bias_arr[i - 1]), m, 1);
-        my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]), &(N->bias_arr[i - 1]));
+        create_arrelement(&(N->theta_arr[i - 1]), m, n);
+        create_arrelement(&(N->bias_arr[i - 1]), 1, n);
+        my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]),\
+                                        &(N->bias_arr[i - 1]));
         my_matrix_print(2, &(N->theta_arr[i - 1]), &(N->bias_arr[i - 1]));
         m = n;
     }

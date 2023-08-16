@@ -13,3 +13,5 @@ typedef struct my_nn {
 void my_nn_create(my_nn_t *N, uint8_t *layers, \
     const uint8_t layers_size);
 void my_nn_free(my_nn_t *N);
+void my_nn_forwardpropagation(my_nn_t *N, my_matrix_t *inputs,\
+                                my_matrix_t **activations);
