@@ -3,6 +3,9 @@
 
 #include "./my_math.h"
 
+#define FALSE 0
+#define TRUE 1
+
 typedef struct my_matrix {
     unsigned int m;
     unsigned int n;
