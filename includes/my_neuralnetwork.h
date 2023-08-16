@@ -12,3 +12,4 @@ typedef struct my_nn {
 
 void my_nn_create(my_nn_t *N, uint8_t *layers, \
     const uint8_t layers_size);
+void my_nn_free(my_nn_t *N);
