@@ -19,9 +19,11 @@ int main(int argc, char* argv[])
 
     my_matrix_print_array(&(N.theta_arr), N.layers_size - 1);
     my_matrix_print_array(&(N.bias_arr), N.layers_size - 1);
-    my_nn_calcerror_mse(&N, &features, &targets);
+    double err = my_nn_calcerror_mse(&N, &features, &targets);
+    my_matrix_print(1, &(N.activations[N.layers_size - 1]));
+    printf("err: %f\n", err);
 
     my_nn_free(&N);
-    my_matrix_free(1, &features);
+    my_matrix_free(1, &features, &targets, &needed);
     return 0;
 }
