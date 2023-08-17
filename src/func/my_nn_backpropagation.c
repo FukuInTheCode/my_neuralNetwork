@@ -25,8 +25,7 @@ void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
     my_matrix_add(&dZ, 2, &(N->activations[N->layers_size - 1]), negY);
     my_matrix_t tmp = {.m = 0, .n = 0};
     my_matrix_t tmp2 = {.m = 0, .n = 0};
-    for (uint8_t i = N->layers_size - 1; i > 0; i--) {
-        my_matrix_print(1, &dZ);
+    for (uint32_t i = N->layers_size - 1; i > 0; i--) {
         my_matrix_transpose(&(N->activations[i - 1]), &tmp);
         my_matrix_product(&tmp2, 2, &tmp, &dZ);
         my_matrix_multiplybyscalar(&tmp2, 1.0/(double)(Y->m), &(N->gradientsTheta[i - 1]));

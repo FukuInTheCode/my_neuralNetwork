@@ -29,8 +29,8 @@ void my_nn_create(my_nn_t *N)
         exit(1);
     }
     uint8_t m = N->layers[0];
-    for (uint8_t i = 1; i < N->layers_size; i++) {
-        uint8_t n = N->layers[i];
+    for (uint32_t i = 1; i < N->layers_size; i++) {
+        uint32_t n = N->layers[i];
         create_arrelement(&(N->theta_arr[i - 1]), m, n);
         create_arrelement(&(N->bias_arr[i - 1]), 1, n);
         my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]),\
@@ -63,7 +63,7 @@ void my_nn_create_gradients(my_nn_t *N)
         fprintf(stderr, "1Memory allocation failed.\n");
         exit(1);
     }
-    for (uint8_t i = 0; i < N->layers_size - 1; i++) {
+    for (uint32_t i = 0; i < N->layers_size - 1; i++) {
         create_arrelement(&(N->gradientsBias[i]), N->bias_arr[i].m, N->bias_arr[i].n);
         create_arrelement(&(N->gradientsTheta[i]), N->theta_arr[i].m, N->theta_arr[i].n);
     }
