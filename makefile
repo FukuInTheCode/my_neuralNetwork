@@ -2,7 +2,7 @@ NAME = my_neuralnetwork
 
 CFLAGS = -W -Wall -Wextra
 
-LIBS = -l$(NAME) -lmy_math -lmy_matrix
+LIBS = -l$(NAME) -lmy_matrix
 
 SRC = $(wildcard ./src/*.c)
 

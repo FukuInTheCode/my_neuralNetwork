@@ -8,10 +8,10 @@ typedef struct my_nn {
     my_matrix_t *bias_arr;
     uint8_t *layers;
     uint8_t layers_size;
+    my_matrix_t *activations;
 } my_nn_t;
 
-void my_nn_create(my_nn_t *N, uint8_t *layers, \
-    const uint8_t layers_size);
+void my_nn_create(my_nn_t *N);
 void my_nn_free(my_nn_t *N);
-void my_nn_forwardpropagation(my_nn_t *N, my_matrix_t *inputs,\
-                                my_matrix_t **activations);
+void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size);
+void my_nn_forwardpropagation(my_nn_t *N, my_matrix_t *inputs);

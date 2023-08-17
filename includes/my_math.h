@@ -20,7 +20,7 @@ static inline __attribute__((always_inline)) void swap(double *a, double *b)
 }
 
 
-double dot_product(double* a, double* b, unsigned int size);
+double my_dot_product(double* a, double* b, unsigned int size);
 double my_power(double x, unsigned int n);
 int my_randint(int minN, int maxN);
 double my_randfloat(double minN, double maxN);
