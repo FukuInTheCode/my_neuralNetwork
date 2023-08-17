@@ -15,3 +15,5 @@ void my_nn_create(my_nn_t *N);
 void my_nn_free(my_nn_t *N);
 void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size);
 void my_nn_forwardpropagation(my_nn_t *N, my_matrix_t *inputs);
+double my_nn_activation_relu(double x);
+double my_nn_calcerror_mse(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y);
