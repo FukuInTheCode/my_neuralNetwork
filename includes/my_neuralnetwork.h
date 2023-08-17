@@ -16,6 +16,7 @@ typedef struct my_nn {
 typedef struct my_params {
     uint32_t iterations;
     double alpha;
+    double threshold;
 } my_params_t;
 
 void my_nn_create(my_nn_t *N);
