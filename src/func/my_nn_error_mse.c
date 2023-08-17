@@ -16,5 +16,5 @@ double my_nn_calcerror_mse(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
     my_matrix_applyfunc(&diff, __square, &squared_diff);
     double sum = my_matrix_sum(&squared_diff);
     my_matrix_free(3, &negY, &diff, &squared_diff);
-    return sum / Y->m;
+    return sum / Y->m / 2;
 }
