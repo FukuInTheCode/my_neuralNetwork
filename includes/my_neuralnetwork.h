@@ -9,6 +9,8 @@ typedef struct my_nn {
     uint8_t *layers;
     uint8_t layers_size;
     my_matrix_t *activations;
+    my_matrix_t *gradientsTheta;
+    my_matrix_t *gradientsBias;
 } my_nn_t;
 
 void my_nn_create(my_nn_t *N);
@@ -17,3 +19,4 @@ void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size);
 void my_nn_forwardpropagation(my_nn_t *N, my_matrix_t *inputs);
 double my_nn_activation_relu(double x);
 double my_nn_calcerror_mse(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y);
+void my_nn_create_gradients(my_nn_t *N);

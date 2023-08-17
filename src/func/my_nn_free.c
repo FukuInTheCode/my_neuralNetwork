@@ -2,7 +2,9 @@
 
 void my_nn_free(my_nn_t *N)
 {
-    my_matrix_free_array(&(N->theta_arr), N->layers_size);
-    my_matrix_free_array(&(N->bias_arr), N->layers_size);
+    my_matrix_free_array(&(N->theta_arr), N->layers_size - 1);
+    my_matrix_free_array(&(N->bias_arr), N->layers_size - 1);
     my_matrix_free_array(&(N->activations), N->layers_size);
+    my_matrix_free_array(&(N->gradientsBias), N->layers_size - 1);
+    my_matrix_free_array(&(N->gradientsTheta), N->layers_size - 1);
 }
