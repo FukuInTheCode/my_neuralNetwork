@@ -1,6 +1,7 @@
 #include "../../includes/my.h"
 
-void my_nn_train(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y, my_params_t *hyper_params)
+void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
+                my_matrix_t *Y, my_params_t *hyper_params)
 {
     my_matrix_t copy = {.m = 0, .n = 0};
     my_matrix_t tmp = {.m = 0, .n = 0};

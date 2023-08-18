@@ -64,7 +64,9 @@ void my_nn_create_gradients(my_nn_t *N)
         exit(1);
     }
     for (uint32_t i = 0; i < N->layers_size - 1; i++) {
-        create_arrelement(&(N->gradientsBias[i]), N->bias_arr[i].m, N->bias_arr[i].n);
-        create_arrelement(&(N->gradientsTheta[i]), N->theta_arr[i].m, N->theta_arr[i].n);
+        create_arrelement(&(N->gradientsBias[i]), \
+                            N->bias_arr[i].m, N->bias_arr[i].n);
+        create_arrelement(&(N->gradientsTheta[i]), \
+                            N->theta_arr[i].m, N->theta_arr[i].n);
     }
 }
