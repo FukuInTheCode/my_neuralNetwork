@@ -5,6 +5,7 @@
 
 #define ll long long
 
+
 static inline __attribute__((always_inline)) void swapint(int *a, int *b)
 {
     const int temp = *a;
