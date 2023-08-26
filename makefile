@@ -1,28 +1,31 @@
-NAME = my_neuralnetwork
+NAME       = my_neuralnetwork
 
-CFLAGS = -W -Wall -Wextra
+CFLAGS     = -W -Wall -Wextra
 
-LIBS = -l$(NAME) -lmy_matrix
+LIB        = -l$(NAME)
 
-SRC = $(wildcard ./src/*.c)
+DEPENDENCIES = -lmy_math -lmy_matrix
 
-LIB_SRC = $(wildcard ./src/func/*.c) \
-				$(wildcard ./src/libs/*.c)
+SRC        = $(wildcard ./src/*.c)
 
-LIB_OBJ = $(LIB_SRC:.c=.o)
+LIB_SRC    = $(wildcard ./src/func/*.c)
 
-OBJ = $(SRC:.c=.o)
+LIB_OBJS    = $(wildcard ./src/func/*.o)
 
 all: archive build clean
 
-archive: $(LIB_OBJ)
-	ar -rcs C:\Users\ADMIN\Code\my_libs\lib$(NAME).a $(LIB_OBJ)
+archive: build_obj $(LIB_OBJS)
+	@ar -rcs C:\Users\ADMIN\Code\my_libs\lib$(NAME).a $(LIB_OBJS)
 
-build: $(OBJ)
+build:
 	@if not exist "./out" mkdir "./out"
-	@gcc $(CFLAGS) $(OBJ) -LC:\Users\ADMIN\Code\my_libs $(LIBS) -o ./out/$(NAME)
+	@gcc $(CFLAGS) $(SRC) -LC:\Users\ADMIN\Code\my_libs $(LIB) -I./includes -o ./out/$(NAME) $(DEPENDENCIES)
 
 clean:
 	@if exist ./src/*.o del /Q src\*.o
 	@if exist ./src/func/*.o del /Q src\func\*.o
-	@if exist ./src/libs/*.o del /Q src\libs\*.o
+	@if exist ./*.o del /Q *.o
+
+build_obj:
+	@gcc $(CFLAGS) $(DEPENDENCIES) -c -LC:\Users\ADMIN\Code\my_libs -I./includes $(LIB_SRC)
+	@move *.o ./src/func

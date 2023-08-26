@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     printf("train set: \n");
     my_matrix_create(m, 1, 2, &features, &targets);
     my_matrix_randfloat(0, 10, 2, &features, &targets);
-    // my_matrix_applyfunc(&features, my_func, &targets);
+    my_matrix_applyfunc(&features, my_func, &targets);
     my_matrix_print(2, &features, &targets);
     my_matrix_t features_test = {.m = 0, .n = 0};
     my_matrix_t subfeatures1_test = {.m = 0, .n = 0};
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     printf("test set: \n");
     my_matrix_create(m, 1, 2, &features_test, &targets_test);
     my_matrix_randfloat(0, 10, 2, &features_test, &targets_test);
-    // my_matrix_applyfunc(&features_test, my_func, &targets_test);
+    my_matrix_applyfunc(&features_test, my_func, &targets_test);
     my_matrix_print(2, &features_test, &targets_test);
 
     printf("-------------------------\n");
