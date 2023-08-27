@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     my_matrix_print(2, &features, &targets);
 
     uint32_t layers[] = {2, 4, 2};
-    my_nn_t nn = {.layers = layers, .layers_size = 3};
+    my_nn_t nn = {.layers = layers, .layers_size = 3, .name = "Neuro"};
     my_nn_create(&nn);
     my_nn_print(&nn);
 

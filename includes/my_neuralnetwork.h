@@ -4,6 +4,7 @@
 #include "my_matrix.h"
 
 typedef struct {
+    char *name;
     my_matrix_t *theta_arr;
     my_matrix_t *bias_arr;
     uint32_t *layers;
