@@ -7,8 +7,9 @@
 #define TRUE 1
 
 typedef struct my_matrix {
-    unsigned int m;
-    unsigned int n;
+    char *name;
+    uint32_t m;
+    uint32_t n;
     double **arr;
 } my_matrix_t;
 
@@ -71,5 +72,6 @@ double my_matrix_maxrow(my_matrix_t *A, const unsigned int m);
 double my_matrix_mincol(my_matrix_t *A, const unsigned int n);
 double my_matrix_minrow(my_matrix_t *A, const unsigned int m);
 void my_matrix_free_array(my_matrix_t **arr, uint8_t size);
-void my_matrix_create_array(my_matrix_t **arr, const uint8_t count, ...);
+void my_matrix_create_array(my_matrix_t **arr, char *common_name, \
+                                const uint32_t count, ...);
 void my_matrix_print_array(my_matrix_t **arr, uint8_t size);
