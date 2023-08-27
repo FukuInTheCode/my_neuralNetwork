@@ -3,7 +3,7 @@
 
 #include "my_matrix.h"
 
-typedef struct my_nn {
+typedef struct {
     my_matrix_t *theta_arr;
     my_matrix_t *bias_arr;
     uint32_t *layers;
@@ -29,3 +29,4 @@ void my_nn_create_gradients(my_nn_t *N);
 void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y);
 void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
                         my_matrix_t *Y, my_params_t *hyper_params);
+void my_nn_print(my_nn_t *N);

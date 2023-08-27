@@ -17,9 +17,9 @@ int main(int argc, char* argv[])
     uint32_t layers[] = {2, 4, 2};
     my_nn_t nn = {.layers = layers, .layers_size = 3};
     my_nn_create(&nn);
-    my_matrix_print_array(&(nn.theta_arr), nn.layers_size - 1);
-    my_matrix_print_array(&(nn.bias_arr), nn.layers_size - 1);
+    my_nn_print(&nn);
 
     my_matrix_free(2, &features, &targets);
+    my_nn_free(&nn);
     return 0;
 }
