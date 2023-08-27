@@ -32,6 +32,7 @@ void my_nn_create(my_nn_t *N)
     for (uint32_t i = 1; i < N->layers_size; i++) {
         uint32_t n = N->layers[i];
         create_arr_element(&(N->theta_arr[i - 1]), m, n);
+        N->theta_arr[i - 1].name = init_str("W")
         create_arr_element(&(N->bias_arr[i - 1]), 1, n);
         my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]),\
                                         &(N->bias_arr[i - 1]));
