@@ -12,6 +12,7 @@ typedef struct {
     my_matrix_t *activations;
     my_matrix_t *gradientsTheta;
     my_matrix_t *gradientsBias;
+    my_bool_t apply_all;
 } my_nn_t;
 
 typedef struct my_params {
@@ -33,3 +34,5 @@ void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
                         my_matrix_t *Y, my_params_t *hyper_params);
 void my_nn_print(my_nn_t *N);
 void my_nn_predict(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *pred);
+double my_nn_activation_sigmoid_grad(double x);
+double my_nn_activation_sigmoid(double x);

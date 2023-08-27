@@ -6,6 +6,11 @@
 #define FALSE 0
 #define TRUE 1
 
+typedef enum {
+    my_false = FALSE,
+    my_true = TRUE
+} my_bool_t;
+
 typedef struct my_matrix {
     char *name;
     uint32_t m;
