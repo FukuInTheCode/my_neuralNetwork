@@ -22,23 +22,21 @@ static void create_arr_element(my_matrix_t *A, unsigned int m, unsigned int n)
 
 void my_nn_create(my_nn_t *N)
 {
-    my_matrix_create_array(&(N->theta_arr), )
-
-    // N->theta_arr = malloc((N->layers_size - 1) * sizeof(my_matrix_t));
-    // N->bias_arr = malloc((N->layers_size - 1) * sizeof(my_matrix_t));
-    // if (N->theta_arr == NULL || N->bias_arr == NULL) {
-    //     fprintf(stderr, "1Memory allocation failed.\n");
-    //     exit(1);
-    // }
-    // uint8_t m = N->layers[0];
-    // for (uint32_t i = 1; i < N->layers_size; i++) {
-    //     uint32_t n = N->layers[i];
-    //     create_arr_element(&(N->theta_arr[i - 1]), m, n);
-    //     create_arr_element(&(N->bias_arr[i - 1]), 1, n);
-    //     my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]),\
-    //                                     &(N->bias_arr[i - 1]));
-    //     m = n;
-    // }
+    N->theta_arr = malloc((N->layers_size - 1) * sizeof(my_matrix_t));
+    N->bias_arr = malloc((N->layers_size - 1) * sizeof(my_matrix_t));
+    if (N->theta_arr == NULL || N->bias_arr == NULL) {
+        fprintf(stderr, "1Memory allocation failed.\n");
+        exit(1);
+    }
+    uint8_t m = N->layers[0];
+    for (uint32_t i = 1; i < N->layers_size; i++) {
+        uint32_t n = N->layers[i];
+        create_arr_element(&(N->theta_arr[i - 1]), m, n);
+        create_arr_element(&(N->bias_arr[i - 1]), 1, n);
+        my_matrix_randfloat(-1, 1, 2, &(N->theta_arr[i - 1]),\
+                                        &(N->bias_arr[i - 1]));
+        m = n;
+    }
     my_nn_create_activation(N, N->layers[0]);
     my_nn_create_gradients(N);
 }

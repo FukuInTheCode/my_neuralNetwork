@@ -75,3 +75,20 @@ void my_matrix_free_array(my_matrix_t **arr, uint8_t size);
 void my_matrix_create_array(my_matrix_t **arr, char *common_name, \
                                 const uint32_t count, ...);
 void my_matrix_print_array(my_matrix_t **arr, uint8_t size);
+
+static inline __attribute__((always_inline)) char *init_str(char **str, int i)
+{
+    size_t ite = (size_t)log10(i) + 1;
+    char *m_str = malloc(strlen(*str) + 1 + ite);
+    if (m_str == NULL) {
+        fprintf(stderr, "Memory Allocation Failed!");
+        exit(1);
+    }
+    strcpy(m_str, *str);
+    m_str[strlen(*str) + ite] = '\0';
+    for (size_t j = 1; j <= ite; ++j) {
+        m_str[strlen(*str) + ite - j] = 48 + i % 10;
+        i = (i - i % 10) / 10;
+    }
+    return m_str;
+}
