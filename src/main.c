@@ -13,6 +13,9 @@ int main(int argc, char* argv[])
     my_matrix_randint(-10, 10, 1, &features);
     my_matrix_applyfunc(&features, my_func, &targets);
     my_matrix_print(2, &features, &targets);
+
+    my_nn_t nn = {}
+
     my_matrix_free(2, &features, &targets);
     return 0;
 }
