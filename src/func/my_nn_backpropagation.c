@@ -1,16 +1,19 @@
 #include "../../includes/my.h"
 
-void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
+void  my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
 {
     my_nn_forwardpropagation(N, inputs);
     my_matrix_t neg_y = {.m = 0, .n = 0, .name = "-Y"};
     my_matrix_multiplybyscalar(Y, -1, &neg_y);
     my_matrix_t diff = {.m = 0, .n = 0, .name = "diff"};
     my_matrix_add(&diff, 2, &(N->activations[N->layers_size - 1]), &neg_y);
-    my_matrix_t dsigz = {.m = 0, .n = 0, .name = "delta sig z"};
-    my_matrix_applyfunc(&(N->z[N->layers_size - 2]), my_nn_activation_sigmoid_grad, &dsigz);
     my_matrix_t dz = {.m = 0, .n = 0, .name = "dZ"};
-    my_matrix_product_elementwise(&dz, 2, &diff, &dsigz);
+    my_matrix_t dsigz = {.m = 0, .n = 0, .name = "delta sig z"};
+    if (N->apply_all) {
+        my_matrix_applyfunc(&(N->z[N->layers_size - 2]), my_nn_activation_sigmoid_grad, &dsigz);
+        my_matrix_product_elementwise(&dz, 2, &diff, &dsigz);
+    } else
+        my_matrix_copy(&diff, &dz);
     for (uint32_t i = 1; i < N->layers_size; ++i) {
         my_matrix_t a_trsp = {.m = 0, .n = 0, .name = "AT"};
         my_matrix_transpose(&(N->activations[N->layers_size - 1 - i]), &a_trsp);
@@ -18,7 +21,8 @@ void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
         my_matrix_product(&not_mean, 2, &a_trsp, &dz);
         my_matrix_multiplybyscalar(&not_mean, 1.0 / (double)Y->m, &(N->gradientsTheta[N->layers_size - 1 - i]));
         my_matrix_t sum_axe_m = {.m = 0, .n = 0, .name = "sum axe m"};
-        my_matrix_sumcol(&dz, &(N->gradientsBias[N->layers_size - 1 - i]));
+        my_matrix_sumcol(&dz, &sum_axe_m);
+        my_matrix_multiplybyscalar(&sum_axe_m, 1.0 / (double)(Y->m), &(N->gradientsBias[N->layers_size - 1 - i]));
         my_matrix_free(3, &a_trsp, &not_mean, &sum_axe_m);
         if (i == N->layers_size - 1) continue;
         my_matrix_t theta_trsp = {.m = 0, .n = 0, .name = "ThetaT"};
