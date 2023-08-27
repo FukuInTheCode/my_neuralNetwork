@@ -6,4 +6,5 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdint.h>
+#include <string.h>
 #include "my_neuralnetwork.h"
