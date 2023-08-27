@@ -39,7 +39,7 @@ void my_nn_create(my_nn_t *N)
                                         &(N->bias_arr[i - 1]));
         m = n;
     }
-    my_nn_create_activation(N, N->layers[0]);
+    my_nn_create_activation(N, 4);
     my_nn_create_gradients(N);
 }
 
@@ -53,11 +53,14 @@ void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size)
     }
     uint8_t n = N->theta_arr[0].m;
     for (uint8_t i = 0; i < N->layers_size; i++) {
-        create_arr_element(&(N->activations[i]), inputs_size, n);
+        N->activations[i].n = 0;
+        my_matrix_create(inputs_size, n, 1, &(N->activations[i]));
         N->activations[i].name = init_str("A", i);
-        if (i < N->layers_size - 1)
+        if (i < N->layers_size - 1) {
+            N->z[i].n = 0;
             create_arr_element(&(N->z[i]), inputs_size, n);
-        N->z[i].name = init_str("Z", i + 1);
+            N->z[i].name = init_str("Z", i + 1);
+        }
         n = N->theta_arr[i].n;
     }
 }
