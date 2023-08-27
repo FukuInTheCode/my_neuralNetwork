@@ -1,36 +1,33 @@
 #include "../../includes/my.h"
 
-static inline __attribute__((always_inline)) \
-            void calc_dz(my_nn_t *N, my_matrix_t *dZ, uint8_t i) {
-    my_matrix_t tmp = {.m = 0, .n = 0};
-    my_matrix_t tmp2 = {.m = 0, .n = 0};
-    my_matrix_transpose(&(N->theta_arr[i - 1]), &tmp);
-    my_matrix_product(&tmp2, 2, dZ, &tmp);
-    my_matrix_applyfunc(&(N->activations[i - 1]), \
-                            my_nn_activation_sigmoid_grad, &tmp);
-    my_matrix_product_elementwise(dZ, 2, &tmp, &tmp2);
-    my_matrix_free(2, &tmp, &tmp2);
-}
-
 void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y)
 {
     my_nn_forwardpropagation(N, inputs);
-    my_matrix_t dZ = {.m = 0, .n = 0};
-    my_matrix_t negY = {.m = 0, .n = 0};
-    my_matrix_multiplybyscalar(Y, -1, &negY);
-    my_matrix_add(&dZ, 2, &(N->activations[N->layers_size - 1]), negY);
-    my_matrix_t tmp = {.m = 0, .n = 0};
-    my_matrix_t tmp2 = {.m = 0, .n = 0};
-    for (uint32_t i = N->layers_size - 1; i > 0; i--) {
-        my_matrix_transpose(&(N->activations[i - 1]), &tmp);
-        my_matrix_product(&tmp2, 2, &tmp, &dZ);
-        my_matrix_multiplybyscalar(&tmp2, 1.0 / (double)(Y->m), \
-                                    &(N->gradientsTheta[i - 1]));
-        my_matrix_sumcol(&dZ, &tmp);
-        my_matrix_multiplybyscalar(&tmp, 1.0 / (double)(Y->m), \
-                                    &(N->gradientsBias[i - 1]));
-        if (i == 1) continue;
-        calc_dz(N, &dZ, i);
+    my_matrix_t neg_y = {.m = 0, .n = 0, .name = "-Y"};
+    my_matrix_multiplybyscalar(Y, -1, &neg_y);
+    my_matrix_t diff = {.m = 0, .n = 0, .name = "diff"};
+    my_matrix_add(&diff, 2, &(N->activations[N->layers_size - 1]), &neg_y);
+    my_matrix_t dsigz = {.m = 0, .n = 0, .name = "delta sig z"};
+    my_matrix_applyfunc(&(N->z[N->layers_size - 2]), my_nn_activation_sigmoid_grad, &dsigz);
+    my_matrix_t dz = {.m = 0, .n = 0, .name = "dZ"};
+    my_matrix_product_elementwise(&dz, 2, &diff, &dsigz);
+    for (uint32_t i = 1; i < N->layers_size; ++i) {
+        my_matrix_t a_trsp = {.m = 0, .n = 0, .name = "AT"};
+        my_matrix_transpose(&(N->activations[N->layers_size - 1 - i]), &a_trsp);
+        my_matrix_t not_mean = {.m = 0, .n = 0, .name = "not_mean"};
+        my_matrix_product(&not_mean, 2, &a_trsp, &dz);
+        my_matrix_multiplybyscalar(&not_mean, 1.0 / (double)Y->m, &(N->gradientsTheta[N->layers_size - 1 - i]));
+        my_matrix_t sum_axe_m = {.m = 0, .n = 0, .name = "sum axe m"};
+        my_matrix_sumcol(&dz, &(N->gradientsBias[N->layers_size - 1 - i]));
+        my_matrix_free(3, &a_trsp, &not_mean, &sum_axe_m);
+        if (i == N->layers_size - 1) continue;
+        my_matrix_t theta_trsp = {.m = 0, .n = 0, .name = "ThetaT"};
+        my_matrix_transpose(&(N->theta_arr[N->layers_size - 1 - i]), &theta_trsp);
+        my_matrix_t p_with_theta = {.m = 0, .n = 0, .name = "produ theta"};
+        my_matrix_product(&p_with_theta, 2, &dz, &theta_trsp);
+        my_matrix_applyfunc(&(N->z[N->layers_size - 2 - i]), my_nn_activation_sigmoid_grad, &dsigz);
+        my_matrix_product_elementwise(&dz, 2, &p_with_theta, &dsigz);
+        my_matrix_free(2, &theta_trsp, &p_with_theta);
     }
-    my_matrix_free(4, &dZ, &negY, &tmp, &tmp2);
+    my_matrix_free(4, &neg_y, &diff, &dsigz, &dz);
 }

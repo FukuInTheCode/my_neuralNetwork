@@ -1,8 +1,5 @@
 #include "../includes/my.h"
 
-static double my_func(double x){
-    return x * x;
-}
 // AND - gates
 double and_train_fea[] = {
     0, 0,
@@ -63,6 +60,8 @@ int main(int argc, char* argv[])
     my_nn_predict(&nn, &features, &predictions);
     my_matrix_print(1, &predictions);
     printf("Starting Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
+
+    my_nn_backpropagation(&nn, &features, &targets);
 
     // my_params_t p = {
     //     .iterations = 1000*10,
