@@ -20,4 +20,5 @@ void my_nn_print(my_nn_t *N)
 
     for (uint8_t i = 0; i < 32 + strlen(N->name); ++i)
         putchar('-');
+    putchar('\n');
 }
