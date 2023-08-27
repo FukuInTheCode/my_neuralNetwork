@@ -46,6 +46,7 @@ void my_nn_create(my_nn_t *N)
 void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size)
 {
     N->activations = malloc(N->layers_size * sizeof(my_matrix_t));
+    N->z = malloc((N->layers_size - 1) * sizeof(my_matrix_t));
     if (N->activations == NULL) {
         fprintf(stderr, "1Memory allocation failed.\n");
         exit(1);
@@ -53,6 +54,8 @@ void my_nn_create_activation(my_nn_t *N, uint8_t inputs_size)
     uint8_t n = N->theta_arr[0].m;
     for (uint8_t i = 0; i < N->layers_size; i++) {
         create_arr_element(&(N->activations[i]), inputs_size, n);
+        if (i < N->layers_size - 1)
+            create_arr_element(&(N->z[i]), inputs_size, n);
         n = N->theta_arr[i].n;
     }
 }

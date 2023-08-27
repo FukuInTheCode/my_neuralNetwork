@@ -10,6 +10,7 @@ typedef struct {
     uint32_t *layers;
     uint32_t layers_size;
     my_matrix_t *activations;
+    my_matrix_t *z;
     my_matrix_t *gradientsTheta;
     my_matrix_t *gradientsBias;
     my_bool_t apply_all;

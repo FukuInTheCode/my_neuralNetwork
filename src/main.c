@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     my_matrix_fill_from_array(&targets, or_train_tar, 4);
     my_matrix_print(2, &features, &targets);
 
-    uint32_t layers[] = {features.n, targets.n};
+    uint32_t layers[] = {features.n, 3, targets.n};
     my_nn_t nn = {.layers = layers, .layers_size = sizeof(layers) / sizeof(uint32_t), .name = "Neuro", .apply_all = my_true};
     my_nn_create(&nn);
     my_nn_print(&nn);
@@ -64,17 +64,17 @@ int main(int argc, char* argv[])
     my_matrix_print(1, &predictions);
     printf("Starting Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
 
-    my_params_t p = {
-        .iterations = 1000*10,
-        .alpha = 1e-1,
-        .threshold = 1e-5
-    };
+    // my_params_t p = {
+    //     .iterations = 1000*10,
+    //     .alpha = 1e-1,
+    //     .threshold = 1e-5
+    // };
 
-    my_nn_train(&nn, &features, &targets, &p);
-    my_nn_print(&nn);
-    printf("Finishing Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
-    my_nn_predict(&nn, &features, &predictions);
-    my_matrix_print(1, &predictions);
+    // my_nn_train(&nn, &features, &targets, &p);
+    // my_nn_print(&nn);
+    // printf("Finishing Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
+    // my_nn_predict(&nn, &features, &predictions);
+    // my_matrix_print(1, &predictions);
 
     my_matrix_free(2, &features, &targets);
     my_nn_free(&nn);
