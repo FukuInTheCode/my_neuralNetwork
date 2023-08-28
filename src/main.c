@@ -53,44 +53,16 @@ double unknw_train_tar[] = {
     0
 };
 
+static double fun(double x)
+{
+    return x * x;
+}
+
 int main(int argc, char* argv[])
 {
     srand(time(NULL));
-    my_matrix_t features = {.m = 0, .n = 0, .name = "features"};
-    my_matrix_t targets = {.m = 0, .n = 0, .name = "targets"};
-    my_matrix_t predictions = {.m = 0, .n = 0, .name = "predictions"};
-    my_matrix_create(4, 2, 1, &features);
-    // my_matrix_randfloat(1, 100, 1, &features);
-    my_matrix_fill_from_array(&features, xor_train_fea, 8);
-    my_matrix_create(4, 1, 1, &targets);
-    my_matrix_fill_from_array(&targets, xor_train_tar, 4);
-    // my_matrix_applyfunc(&features, log, &targets);
-    my_matrix_print(2, &features, &targets);
 
-    uint32_t layers[] = {features.n, 2, targets.n};
-    my_nn_t nn = {.layers = layers, .layers_size = sizeof(layers) / sizeof(uint32_t), .name = "Neuro", .apply_all = my_true};
-    my_nn_create(&nn);
-    my_nn_print(&nn);
+    my_matrix_t A = {.m = 0, .n = 0, .name = "A"};
 
-    my_nn_predict(&nn, &features, &predictions);
-    my_matrix_print(1, &predictions);
-    printf("Starting Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
-
-    my_nn_backpropagation(&nn, &features, &targets);
-
-    my_params_t p = {
-        .iterations = 1000*10,
-        .alpha = 1e-1,
-        .threshold = 1e-5
-    };
-
-    my_nn_train(&nn, &features, &targets, &p);
-    my_nn_print(&nn);
-    printf("Finishing Error: %lf\n", my_nn_calcerror_mse(&nn, &features, &targets));
-    my_nn_predict(&nn, &features, &predictions);
-    my_matrix_print(1, &predictions);
-
-    my_matrix_free(2, &features, &targets);
-    my_nn_free(&nn);
     return 0;
 }
