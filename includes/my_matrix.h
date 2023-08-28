@@ -8,6 +8,9 @@
 
 #define MAT_PRINT(A) my_matrix_print(1, &A)
 
+#define MAT_PRINT_DIM(A) printf("%s's dim: m = %u, n = %u\n", A.name, A.m, A.n)
+
+
 #define MAT_DECLA(A) my_matrix_t A = {.n = 0, .m = 0, .name = #A}
 
 typedef enum {
