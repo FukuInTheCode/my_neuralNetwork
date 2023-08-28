@@ -31,7 +31,7 @@ double my_nn_activation_relu_grad(double x);
 double my_nn_calcerror_mse(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y);
 void my_nn_create_gradients(my_nn_t *N);
 void my_nn_backpropagation(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *Y);
-void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
+uint32_t my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
                         my_matrix_t *Y, my_params_t *hyper_params);
 void my_nn_print(my_nn_t *N);
 void my_nn_predict(my_nn_t *N, my_matrix_t *inputs, my_matrix_t *pred);

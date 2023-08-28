@@ -1,6 +1,6 @@
 #include "../../includes/my.h"
 
-void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
+uint32_t my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
                 my_matrix_t *Y, my_params_t *hyper_params)
 {
     my_matrix_t copy = {.m = 0, .n = 0};
@@ -20,6 +20,6 @@ void my_nn_train(my_nn_t *N, my_matrix_t *inputs, \
             my_matrix_add(&(N->bias_arr[j]), 2, &copy, &tmp);
         }
     }
-    printf("took %u iterations to train!\n", i);
     my_matrix_free(2, &copy, &tmp);
+    return i;
 }
