@@ -62,7 +62,15 @@ int main(int argc, char* argv[])
 {
     srand(time(NULL));
 
-    my_matrix_t A = {.m = 0, .n = 0, .name = "A"};
+    MAT_DECLA(W);
+
+    my_matrix_create(2, 1, 1, &W);
+
+    my_matrix_randfloat(-1, 1, 1, &W);
+
+    MAT_PRINT(W);
+
+    my_matrix_free(1, &W);
 
     return 0;
 }
