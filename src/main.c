@@ -107,7 +107,6 @@ int main(int argc, char* argv[])
     my_matrix_applyfunc(&diff, square, &tmp);
 
     double sum = my_matrix_sum(&tmp);
-    printf("sum = %lf\n", sum);
     sum /= (double)targets.n;
     printf("sum = %lf\n", sum);
 
