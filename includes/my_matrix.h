@@ -6,6 +6,10 @@
 #define FALSE 0
 #define TRUE 1
 
+#define MAT_PRINT(A) my_matrix_print(1, &A)
+
+#define MAT_CREATE(A) my_matrix_t A = {.n = 0, .m = 0, .name = #A}
+
 typedef enum {
     my_false = FALSE,
     my_true = TRUE
