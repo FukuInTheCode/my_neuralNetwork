@@ -7,8 +7,12 @@ void my_nn_forward(my_nn_t *nn, my_matrix_t *x, uint32_t size)
         MAT_DECLA(tmp);
         MAT_DECLA(z);
         my_matrix_product(&tmp, 2, &(nn->theta_arr[i - 1]), x);
-        MAT_PRINT_DIM(tmp);
 
+        my_matrix_add(&z, 2, &tmp, &(nn->bias_arr[i - 1]));
+
+        my_matrix_applyfunc(&z, nn->funcs.af, &(nn->activations[i]));
+
+        MAT_PRINT_DIM((nn->activations[i]));
 
         my_matrix_free(2, &tmp, &z);
     }
