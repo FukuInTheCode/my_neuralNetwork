@@ -62,11 +62,21 @@ int main(int argc, char* argv[])
 {
     srand(69);
 
+    MAT_DECLA(features);
+
+    my_matrix_create(2, 10, 1, &features);
+
+    MAT_PRINT(features);
+
     my_nn_t nn;
 
-    uint32_t dims[] = {2,32, 32, 1};
+    uint32_t size = 2;
 
-    my_nn_create(&nn, dims, 4);
+    uint32_t dims[] = {2, 1};
+
+    my_nn_create(&nn, dims, size);
+
+    my_nn_forward(&nn, &features, size);
 
     printf("Hello\n");
 
