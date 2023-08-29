@@ -70,6 +70,8 @@ int main(int argc, char* argv[])
 
     my_nn_t nn;
 
+    nn.funcs.af = my_nn_sigmoid;
+
     uint32_t size = 2;
 
     uint32_t dims[] = {2, 1};

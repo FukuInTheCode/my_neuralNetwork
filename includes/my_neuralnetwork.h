@@ -16,3 +16,4 @@ typedef struct {
 
 void my_nn_create(my_nn_t *nn, uint32_t *dimensions, uint32_t dimensions_size);
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x, uint32_t size);
+double my_nn_sigmoid(double x);

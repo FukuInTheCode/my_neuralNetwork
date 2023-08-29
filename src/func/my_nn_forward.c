@@ -12,8 +12,6 @@ void my_nn_forward(my_nn_t *nn, my_matrix_t *x, uint32_t size)
 
         my_matrix_applyfunc(&z, nn->funcs.af, &(nn->activations[i]));
 
-        MAT_PRINT_DIM((nn->activations[i]));
-
         my_matrix_free(2, &tmp, &z);
     }
 }
