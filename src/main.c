@@ -62,5 +62,13 @@ int main(int argc, char* argv[])
 {
     srand(69);
 
+    my_nn_t nn;
+
+    uint32_t dims[] = {2,32, 32, 1};
+
+    my_nn_create(&nn, dims, 4);
+
+    printf("Hello\n");
+
     return 0;
 }
