@@ -75,8 +75,7 @@ int main(int argc, char* argv[])
 
     nn.funcs.af = my_nn_sigmoid;
     nn.funcs.grad_af = my_nn_sig_grad;
-
-    uint32_t size = 4;
+    nn.size = 4;
 
     uint32_t dims[] = {2, 32, 32, 1};
 

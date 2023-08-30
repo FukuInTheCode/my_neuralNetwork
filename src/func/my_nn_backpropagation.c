@@ -51,7 +51,5 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t s
         my_matrix_applyfunc(&z, nn->funcs.grad_af, &grad_a);
 
         my_matrix_product_elementwise(&dz, 2, &wt_dot_dz, &grad_a);
-
-
     }
 }

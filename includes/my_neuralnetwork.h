@@ -6,6 +6,7 @@
 typedef double (*double_func_double)(double);
 
 typedef struct {
+    uint32_t size;
     my_matrix_t *theta_arr;
     my_matrix_t *bias_arr;
     my_matrix_t *activations;
