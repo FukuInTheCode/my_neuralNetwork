@@ -53,9 +53,9 @@ double unknw_train_tar[] = {
     0
 };
 
-static double square(double x)
+static double fun(double x)
 {
-    return x * x;
+    return x * 2;
 }
 
 int main(int argc, char* argv[])
@@ -65,8 +65,9 @@ int main(int argc, char* argv[])
     MAT_DECLA(features);
     MAT_DECLA(targets);
 
-    my_matrix_create(2, 10, 1, &features);
-    my_matrix_create(1, 10, 1, &targets);
+    my_matrix_create(1, 10, 1, &features);
+    my_matrix_randint(0, 100, 1, &features);
+    my_matrix_applyfunc(&features, fun, &targets);
 
     MAT_PRINT(features);
     MAT_PRINT(targets);
@@ -75,9 +76,9 @@ int main(int argc, char* argv[])
 
     nn.funcs.af = my_nn_sigmoid;
     nn.funcs.grad_af = my_nn_sig_grad;
-    nn.size = 4;
+    nn.size = 2;
 
-    uint32_t dims[] = {2, 32, 32, 1};
+    uint32_t dims[] = {1, 1};
 
     my_nn_create(&nn, dims);
 
@@ -91,9 +92,17 @@ int main(int argc, char* argv[])
 
     my_nn_predict(&nn, &features, &predictions);
 
+    printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
+
     MAT_PRINT(predictions);
 
-    // my_nn_train(&nn, &features, &targets, &hparams);
+    my_nn_train(&nn, &features, &targets, &hparams);
+
+    printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
+
+    my_nn_predict(&nn, &features, &predictions);
+
+    MAT_PRINT(predictions);
 
     return 0;
 }
