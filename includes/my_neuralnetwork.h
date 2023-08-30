@@ -18,8 +18,8 @@ typedef struct {
     } funcs;
 } my_nn_t;
 
-void my_nn_create(my_nn_t *nn, uint32_t *dimensions, uint32_t dimensions_size);
-void my_nn_forward(my_nn_t *nn, my_matrix_t *x, uint32_t size);
+void my_nn_create(my_nn_t *nn, uint32_t *dimensions);
+void my_nn_forward(my_nn_t *nn, my_matrix_t *x);
 double my_nn_sigmoid(double x);
 double my_nn_sig_grad(double x);
-void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t size);
+void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y);

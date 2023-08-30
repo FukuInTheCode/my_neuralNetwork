@@ -1,8 +1,8 @@
 #include "../../includes/my.h"
 
-void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t size)
+void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 {
-    my_nn_forward(nn, x, size);
+    my_nn_forward(nn, x);
     uint32_t m = y->n;
 
     MAT_DECLA(dz);
@@ -11,9 +11,9 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t s
 
     my_matrix_multiplybyscalar(y, -1, &neg_y);
 
-    my_matrix_add(&dz, 2, &(nn->activations[size - 1]), &neg_y);
+    my_matrix_add(&dz, 2, &(nn->activations[nn->size - 1]), &neg_y);
 
-    for (uint32_t i = size - 1; i > 0; --i) {
+    for (uint32_t i = nn->size - 1; i > 0; --i) {
         MAT_DECLA(at);
 
         my_matrix_transpose(&(nn->activations[i - 1]), &at);
