@@ -30,12 +30,15 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t s
 
         my_matrix_multiplybyscalar(&summed_dz, 1.0 / m, &(nn->gradients_bias[i - 1]));
 
-        // MAT_DECLA(wt);
+        MAT_DECLA(wt);
 
-        // my_matrix_transpose(&(nn->theta_arr[i - 1]), &wt);
+        my_matrix_transpose(&(nn->theta_arr[i - 1]), &wt);
 
-        // MAT_DECLA(wt_dot_dz);
+        MAT_DECLA(wt_dot_dz);
 
+        my_matrix_product(&wt_dot_dz, 2, &wt, &dz);
+
+        
 
 
     }
