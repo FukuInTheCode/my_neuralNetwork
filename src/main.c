@@ -74,6 +74,7 @@ int main(int argc, char* argv[])
     my_nn_t nn;
 
     nn.funcs.af = my_nn_sigmoid;
+    nn.funcs.grad_af = my_nn_sig_grad;
 
     uint32_t size = 4;
 
@@ -87,6 +88,8 @@ int main(int argc, char* argv[])
     }
 
     my_nn_forward(&nn, &features, size);
+
+    printf("\n");
 
     my_nn_backprogation(&nn, &features, &targets, size);
 

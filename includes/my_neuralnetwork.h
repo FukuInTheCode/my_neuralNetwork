@@ -3,7 +3,7 @@
 
 #include "my_matrix.h"
 
-typedef double (*activation_func)(double);
+typedef double (*double_func_double)(double);
 
 typedef struct {
     my_matrix_t *theta_arr;
@@ -12,7 +12,8 @@ typedef struct {
     my_matrix_t *gradients_theta;
     my_matrix_t *gradients_bias;
     struct {
-        activation_func af;
+        double_func_double af;
+        double_func_double grad_af;
     } funcs;
 } my_nn_t;
 
