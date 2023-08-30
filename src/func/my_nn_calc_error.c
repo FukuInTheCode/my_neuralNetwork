@@ -1,5 +1,10 @@
 #include "../../includes/my.h"
 
+static double square(double x)
+{
+    return x * x;
+}
+
 double my_nn_calc_error(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 {
 
@@ -15,7 +20,11 @@ double my_nn_calc_error(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 
     my_matrix_add(&diff, 2, &p, &neg_y);
 
-    double res = my_matrix_sum(&diff);
+    MAT_DECLA(diff_squared);
+
+    my_matrix_applyfunc(&diff, square, &diff_squared);
+
+    double res = my_matrix_sum(&diff_squared);
 
     res /= y->n;
 

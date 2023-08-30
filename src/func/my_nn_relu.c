@@ -2,5 +2,6 @@
 
 double my_nn_relu(double x)
 {
-    return x < 0  ? 0 : x;
+    if (x > 0) return x;
+    return 0;
 }

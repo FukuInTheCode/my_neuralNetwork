@@ -55,54 +55,68 @@ double unknw_train_tar[] = {
 
 static double fun(double x)
 {
-    return x * 2;
+    return x * x;
 }
 
 int main(int argc, char* argv[])
 {
-    srand(69);
+    srand(time(0));
 
+    MAT_DECLA(features_tr);
     MAT_DECLA(features);
+    MAT_DECLA(targets_tr);
     MAT_DECLA(targets);
 
-    my_matrix_create(1, 10, 1, &features);
-    my_matrix_randint(0, 100, 1, &features);
-    my_matrix_applyfunc(&features, fun, &targets);
+    MAT_DECLA(test_tr);
+    MAT_DECLA(test);
+    MAT_DECLA(test_tar_tr);
+    MAT_DECLA(test_tar);
 
-    MAT_PRINT(features);
-    MAT_PRINT(targets);
+    my_matrix_create(100, 1, 1, &features_tr);
+    my_matrix_create(100, 1, 1, &test_tr);
+    // my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
+    my_matrix_randfloat(0, 100, 1, &features_tr);
+    my_matrix_randfloat(0, 100, 1, &test_tr);
+    my_matrix_applyfunc(&features_tr, fun, &targets_tr);
+    my_matrix_applyfunc(&test_tr, fun, &test_tar_tr);
+    // my_matrix_create(4, 1, 1, &targets_tr);
+    // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
+
+    my_matrix_transpose(&features_tr, &features);
+    my_matrix_transpose(&test_tr, &test);
+    my_matrix_transpose(&targets_tr, &targets);
+    my_matrix_transpose(&test_tar_tr, &test_tar);
+
+    MAT_PRINT(features_tr);
+    MAT_PRINT(targets_tr);
+    MAT_PRINT(test_tr);
 
     my_nn_t nn;
 
-    nn.funcs.af = my_nn_sigmoid;
-    nn.funcs.grad_af = my_nn_sig_grad;
-    nn.size = 2;
+    nn.funcs.af = my_nn_relu;
+    nn.funcs.grad_af = my_nn_relu_grad;
+    nn.size = 4;
 
-    uint32_t dims[] = {1, 1};
+    uint32_t dims[] = {1, 3, 3, 1};
 
     my_nn_create(&nn, dims);
 
     my_params_t hparams = {
-        .alpha = 1e-2,
-        .epoch = 100,
+        .alpha = 1e-3,
+        .epoch = 10*1000,
         .threshold = 1e-10
     };
 
-    MAT_DECLA(predictions);
-
-    my_nn_predict(&nn, &features, &predictions);
-
     printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
 
-    MAT_PRINT(predictions);
+    printf("\n");
+    printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
 
     my_nn_train(&nn, &features, &targets, &hparams);
 
     printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
-
-    my_nn_predict(&nn, &features, &predictions);
-
-    MAT_PRINT(predictions);
+    printf("\n");
+    printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
 
     return 0;
 }
