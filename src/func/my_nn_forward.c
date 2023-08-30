@@ -1,10 +1,10 @@
 #include "../../includes\my.h"
 
-void my_nn_forward(my_nn_t *nn, my_matrix_t *x, uint32_t size)
+void my_nn_forward(my_nn_t *nn, my_matrix_t *x)
 {
     my_matrix_copy(x, &(nn->activations[0]));
 
-    for (uint32_t i = 1; i < size; ++i) {
+    for (uint32_t i = 1; i < nn->size; ++i) {
         MAT_DECLA(tmp);
         MAT_DECLA(z);
 
