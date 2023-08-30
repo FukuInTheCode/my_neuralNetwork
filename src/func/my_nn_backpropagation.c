@@ -13,7 +13,18 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, uint32_t s
 
     my_matrix_add(&dz, 2, &(nn->activations[size - 1]), &neg_y);
 
-    for (uint32_t i = size - 1; i >= 0; --i) {
-        
+    for (uint32_t i = size - 1; i > 0; --i) {
+        MAT_DECLA(at);
+
+        my_matrix_transpose(&(nn->activations[i - 1]), &at);
+
+        MAT_DECLA(dz_dot_at);
+
+        my_matrix_product(&dz_dot_at, 2, &dz, &at);
+    
+        my_matrix_multiplybyscalar(&dz_dot_at, 1.0 / m, &(nn->gradients_theta[i - 1]));
+
+        MAT_PRINT_DIM((nn->gradients_theta[i - 1]));
+
     }
 }
