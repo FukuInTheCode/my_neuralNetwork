@@ -65,11 +65,11 @@ int main(int argc, char* argv[])
     MAT_DECLA(features);
     MAT_DECLA(targets);
 
-    my_matrix_create(2, 100, 1, &features);
-    my_matrix_create(1, 100, 1, &targets);
+    my_matrix_create(2, 10, 1, &features);
+    my_matrix_create(1, 10, 1, &targets);
 
-    MAT_PRINT_DIM(features);
-    MAT_PRINT_DIM(targets);
+    MAT_PRINT(features);
+    MAT_PRINT(targets);
 
     my_nn_t nn;
 
@@ -81,9 +81,19 @@ int main(int argc, char* argv[])
 
     my_nn_create(&nn, dims);
 
-    printf("\n");
+    my_params_t hparams = {
+        .alpha = 1e-2,
+        .epoch = 100,
+        .threshold = 1e-10
+    };
 
-    my_nn_backprogation(&nn, &features, &targets);
+    MAT_DECLA(predictions);
+
+    my_nn_predict(&nn, &features, &predictions);
+
+    MAT_PRINT(predictions);
+
+    // my_nn_train(&nn, &features, &targets, &hparams);
 
     return 0;
 }
