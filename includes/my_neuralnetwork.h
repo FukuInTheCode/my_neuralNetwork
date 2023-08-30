@@ -18,8 +18,15 @@ typedef struct {
     } funcs;
 } my_nn_t;
 
+typedef struct {
+    double alpha;
+    uint32_t epoch;
+    double threshold;
+} my_params_t;
+
 void my_nn_create(my_nn_t *nn, uint32_t *dimensions);
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x);
 double my_nn_sigmoid(double x);
 double my_nn_sig_grad(double x);
 void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y);
+void my_nn_train(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t *hp);
