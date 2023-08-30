@@ -8,11 +8,3 @@
 #include <stdint.h>
 #include <string.h>
 #include "my_neuralnetwork.h"
-
-static inline __attribute__((always_inline)) void check_alloc(void *A)
-{
-    if (A == NULL) {
-        fprintf(stderr, "Memory allocation failed!");
-        exit(1);
-    }
-}

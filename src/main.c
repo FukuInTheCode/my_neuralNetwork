@@ -64,23 +64,21 @@ int main(int argc, char* argv[])
 
     MAT_DECLA(features);
 
-    my_matrix_create(2, 10, 1, &features);
+    my_matrix_create(2, 100, 1, &features);
 
-    MAT_PRINT(features);
+    MAT_PRINT_DIM(features);
 
     my_nn_t nn;
 
     nn.funcs.af = my_nn_sigmoid;
 
-    uint32_t size = 2;
+    uint32_t size = 4;
 
-    uint32_t dims[] = {2, 1};
+    uint32_t dims[] = {2, 32, 32, 1};
 
     my_nn_create(&nn, dims, size);
 
     my_nn_forward(&nn, &features, size);
-
-    printf("Hello\n");
 
     return 0;
 }
