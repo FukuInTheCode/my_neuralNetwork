@@ -81,6 +81,11 @@ int main(int argc, char* argv[])
 
     my_nn_create(&nn, dims, size);
 
+    for (uint32_t i = 0; i < size - 1; ++i) {
+        MAT_PRINT_DIM(nn.theta_arr[i]);
+        MAT_PRINT_DIM(nn.bias_arr[i]);
+    }
+
     my_nn_forward(&nn, &features, size);
 
     my_nn_backprogation(&nn, &features, &targets, size);
