@@ -72,24 +72,26 @@ int main(int argc, char* argv[])
     MAT_DECLA(test_tar_tr);
     MAT_DECLA(test_tar);
 
-    my_matrix_create(100, 1, 1, &features_tr);
-    my_matrix_create(100, 1, 1, &test_tr);
-    // my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
+    my_matrix_create(10, 1, 1, &features_tr);
+    // my_matrix_create(100, 1, 1, &test_tr);
+    // my_matrix_fill_from_array(&features_tr, unknw_train_fea, 8);
     my_matrix_randfloat(0, 100, 1, &features_tr);
-    my_matrix_randfloat(0, 100, 1, &test_tr);
-    my_matrix_applyfunc(&features_tr, fun, &targets_tr);
-    my_matrix_applyfunc(&test_tr, fun, &test_tar_tr);
+    // my_matrix_randfloat(0, 100, 1, &test_tr);
+    // my_matrix_applyfunc(&features_tr, fun, &targets_tr);
+    my_matrix_create(10, 1, 1, &targets_tr);
+    my_matrix_randfloat(0, 100, 1, &targets_tr);
+    // my_matrix_applyfunc(&test_tr, fun, &test_tar_tr);
     // my_matrix_create(4, 1, 1, &targets_tr);
-    // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
+    // my_matrix_fill_from_array(&targets_tr, unknw_train_tar, 4);
 
     my_matrix_transpose(&features_tr, &features);
-    my_matrix_transpose(&test_tr, &test);
+    // my_matrix_transpose(&test_tr, &test);
     my_matrix_transpose(&targets_tr, &targets);
-    my_matrix_transpose(&test_tar_tr, &test_tar);
+    // my_matrix_transpose(&test_tar_tr, &test_tar);
 
     MAT_PRINT(features_tr);
     MAT_PRINT(targets_tr);
-    MAT_PRINT(test_tr);
+    // MAT_PRINT(test_tr);
 
     my_nn_t nn;
 
@@ -97,26 +99,31 @@ int main(int argc, char* argv[])
     nn.funcs.grad_af = my_nn_relu_grad;
     nn.size = 4;
 
-    uint32_t dims[] = {1, 3, 3, 1};
+    uint32_t dims[] = {features.m, 32, 32, targets.m};
 
     my_nn_create(&nn, dims);
 
     my_params_t hparams = {
-        .alpha = 1e-3,
+        .alpha = 1e-2,
         .epoch = 10*1000,
         .threshold = 1e-10
     };
 
     printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
 
-    printf("\n");
-    printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
+    MAT_PRINT(nn.theta_arr[0]);
+    MAT_PRINT(nn.bias_arr[0]);
+
+    // printf("\n");
+    // printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
 
     my_nn_train(&nn, &features, &targets, &hparams);
 
+    MAT_PRINT(nn.theta_arr[0]);
+    MAT_PRINT(nn.bias_arr[0]);
     printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
-    printf("\n");
-    printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
+    // printf("\n");
+    // printf("test error: %lf\n", my_nn_calc_error(&nn, &test, &test_tar));
 
     return 0;
 }
