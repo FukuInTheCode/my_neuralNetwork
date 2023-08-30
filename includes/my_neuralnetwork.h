@@ -9,6 +9,8 @@ typedef struct {
     my_matrix_t *theta_arr;
     my_matrix_t *bias_arr;
     my_matrix_t *activations;
+    my_matrix_t *gradients_theta;
+    my_matrix_t *gradients_bias;
     struct {
         activation_func af;
     } funcs;
