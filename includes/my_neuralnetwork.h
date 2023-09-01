@@ -39,3 +39,5 @@ double my_nn_linear_grad(double x);
 void my_nn_free(my_nn_t *nn);
 double my_nn_tanh_grad(double x);
 double my_nn_tanh(double x);
+double my_nn_sin(double x);
+double my_nn_sin_grad(double x);
