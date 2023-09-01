@@ -41,5 +41,8 @@ double my_nn_tanh_grad(double x);
 double my_nn_tanh(double x);
 double my_nn_sin(double x);
 double my_nn_sin_grad(double x);
-double my_nn_sinc(double x):
+double my_nn_sinc(double x);
 double my_nn_sinc_grad(double x);
+double my_nn_softplus_grad(double x);
+double my_nn_softplus(double x);
+

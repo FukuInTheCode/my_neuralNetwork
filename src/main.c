@@ -196,7 +196,7 @@ int main(int argc, char* argv[])
     MAT_PRINT(predicts);
     printf("--------------------------\n");
     printf("--------------------------\n");
-    printf("--------sins-----\n");
+    printf("--------sinc-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
 
