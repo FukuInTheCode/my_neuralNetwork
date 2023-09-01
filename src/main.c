@@ -53,9 +53,31 @@ double unknw_train_tar[] = {
     0
 };
 
-static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
+static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t *hp)
 {
-    
+
+    MAT_DECLA(predicts);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------%s-----\n", nn->name);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    srand(69);
+
+    nn->size = 3;
+    uint32_t dims[] = {x->m, 2, y->m};
+
+    my_nn_create(nn, dims);
+
+    printf("starting error: %lf\n", my_nn_calc_error(nn, x, y));
+
+    printf("took: %u\n", my_nn_train(nn, x, y, hp));
+
+    printf("ending error: %lf\n", my_nn_calc_error(nn, x, y));
+
+    my_nn_predict(nn, x, &predicts);
+    MAT_PRINT(predicts);
+    MAT_FREE(predicts);
 }
 
 int main(int argc, char* argv[])
@@ -85,310 +107,14 @@ int main(int argc, char* argv[])
         .threshold = 1e-3
     };
 
-    my_nn_t nn1;
-    nn1.size = 3;
+    my_nn_t neuro = {.name = "neuro"};
 
-    uint32_t dims[] = {features.m, 2, targets.m};
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------Linear-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
+    neuro.funcs.af = my_nn_sin;
+    neuro.funcs.grad_af = my_nn_sin_grad;
 
-    nn1.funcs.af = my_nn_linear;
-    nn1.funcs.grad_af = my_nn_linear_grad;
+    test_model(&neuro, &features, &targets, &hparams);
 
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------RELU-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-    nn1.funcs.af = my_nn_relu;
-    nn1.funcs.grad_af = my_nn_relu_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------tanh-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_tanh;
-    nn1.funcs.grad_af = my_nn_tanh_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------sigmoid-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_sigmoid;
-    nn1.funcs.grad_af = my_nn_sig_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------sin-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_sin;
-    nn1.funcs.grad_af = my_nn_sin_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------sinc-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_sinc;
-    nn1.funcs.grad_af = my_nn_sinc_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------softplus-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_softplus;
-    nn1.funcs.grad_af = my_nn_softplus_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------identite courbe-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_idc;
-    nn1.funcs.grad_af = my_nn_idc_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------leaky RELU-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_leaky;
-    nn1.funcs.grad_af = my_nn_leaky_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------SILU-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_silu;
-    nn1.funcs.grad_af = my_nn_silu_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------GELU-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-    nn1.funcs.af = my_nn_gelu;
-    nn1.funcs.grad_af = my_nn_gelu_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------Gaussian-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_gaussian;
-    nn1.funcs.grad_af = my_nn_gaussian_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    printf("--------Binary steps-----\n");
-    printf("--------------------------\n");
-    printf("--------------------------\n");
-    srand(69);
-
-
-    nn1.funcs.af = my_nn_binarystep;
-    nn1.funcs.grad_af = my_nn_binarystep_grad;
-
-    my_nn_create(&nn1, dims);
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
-
-    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
-
-    my_nn_predict(&nn1, &features, &predicts);
-    MAT_PRINT(predicts);
-
-    my_nn_free(&nn1);
+    my_nn_free(&neuro);
 
     return 0;
 }

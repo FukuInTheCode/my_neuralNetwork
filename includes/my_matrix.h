@@ -105,6 +105,8 @@ void my_matrix_swapcol_2(my_matrix_t *A, const unsigned int a, \
     const unsigned int b);
 void my_matrix_swaprow_2(my_matrix_t *A, const unsigned int a, \
     const unsigned int b);
+void my_matrix_multiplybyscalar_2(my_matrix_t *A, double scalar);
+void my_matrix_transpose_2(my_matrix_t *A);
 
 static inline __attribute__((always_inline)) char *init_str(char *str, int i)
 {
