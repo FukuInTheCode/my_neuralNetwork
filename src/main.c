@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
     MAT_PRINT(targets_tr);
 
     my_params_t hparams = {
-        .alpha = 1e-2,
+        .alpha = 1e-1,
         .epoch = 100*1000,
         .threshold = 1e-3
     };
@@ -324,6 +324,29 @@ int main(int argc, char* argv[])
 
     nn1.funcs.af = my_nn_gelu;
     nn1.funcs.grad_af = my_nn_gelu_grad;
+
+    my_nn_create(&nn1, dims);
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+
+    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------Gaussian-----\n");
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    srand(69);
+
+
+    nn1.funcs.af = my_nn_gaussian;
+    nn1.funcs.grad_af = my_nn_gaussian_grad;
 
     my_nn_create(&nn1, dims);
 
