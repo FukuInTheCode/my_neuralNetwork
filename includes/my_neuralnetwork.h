@@ -47,3 +47,5 @@ double my_nn_softplus_grad(double x);
 double my_nn_softplus(double x);
 double my_nn_idc_grad(double x);
 double my_nn_idc(double x);
+double my_nn_leaky_grad(double x);
+double my_nn_leaky(double x);
