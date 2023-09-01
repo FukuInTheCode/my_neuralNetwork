@@ -53,11 +53,6 @@ double unknw_train_tar[] = {
     0
 };
 
-static double fun(double x)
-{
-    return x * x;
-}
-
 int main(int argc, char* argv[])
 {
     srand(time(0));
@@ -79,15 +74,21 @@ int main(int argc, char* argv[])
     MAT_PRINT(features_tr);
     MAT_PRINT(targets_tr);
 
-    my_nn_t nn;
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------tanh-----\n");
+    printf("--------------------------\n");
+    printf("--------------------------\n");
 
-    nn.funcs.af = my;
-    nn.funcs.grad_af = my_nn_sig_grad;
-    nn.size = 2;
+    my_nn_t nn1;
+
+    nn1.funcs.af = my_nn_tanh;
+    nn1.funcs.grad_af = my_nn_tanh_grad;
+    nn1.size = 2;
 
     uint32_t dims[] = {features.m, targets.m};
 
-    my_nn_create(&nn, dims);
+    my_nn_create(&nn1, dims);
 
     my_params_t hparams = {
         .alpha = 1e-2,
@@ -95,18 +96,40 @@ int main(int argc, char* argv[])
         .threshold = 1e-10
     };
 
-    printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
-    my_nn_predict(&nn, &features, &predicts);
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+    my_nn_predict(&nn1, &features, &predicts);
     MAT_PRINT(predicts);
 
-    my_nn_train(&nn, &features, &targets, &hparams);
+    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
 
-    printf("error: %lf\n", my_nn_calc_error(&nn, &features, &targets));
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
 
-    my_nn_predict(&nn, &features, &predicts);
+    my_nn_predict(&nn1, &features, &predicts);
     MAT_PRINT(predicts);
 
-    my_nn_free(&nn);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------RELU-----\n");
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+
+    nn1.funcs.af = my_nn_relu;
+    nn1.funcs.grad_af = my_nn_relu_grad;
+
+    my_nn_create(&nn1, dims);
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+
+    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+
+    my_nn_free(&nn1);
 
     return 0;
 }

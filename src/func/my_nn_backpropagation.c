@@ -1,7 +1,5 @@
 #include "../../includes/my.h"
 
-static inline void calc_dz()
-
 void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 {
     my_nn_forward(nn, x);
