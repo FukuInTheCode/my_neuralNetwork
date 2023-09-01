@@ -316,6 +316,5 @@ int main(int argc, char* argv[])
 
     my_nn_free(&nn1);
 
-
     return 0;
 }
