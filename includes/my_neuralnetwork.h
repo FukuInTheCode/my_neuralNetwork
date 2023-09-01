@@ -53,3 +53,5 @@ double my_nn_silu_grad(double x);
 double my_nn_silu(double x);
 double my_nn_gelu_grad(double x);
 double my_nn_gelu(double x);
+double my_nn_gaussian(double x);
+double my_nn_gaussian_grad(double x);
