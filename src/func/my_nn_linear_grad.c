@@ -2,5 +2,6 @@
 
 double my_nn_linear_grad(double x)
 {
-    return 1;
+    if (x == 0) return 1;
+    return x / x;
 }
