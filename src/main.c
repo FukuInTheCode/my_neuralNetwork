@@ -55,7 +55,7 @@ double unknw_train_tar[] = {
 
 int main(int argc, char* argv[])
 {
-    srand(time(0));
+    srand(69);
 
     MAT_DECLA(features_tr);
     MAT_DECLA(features);
@@ -110,6 +110,7 @@ int main(int argc, char* argv[])
     printf("--------RELU-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
     nn1.funcs.af = my_nn_relu;
     nn1.funcs.grad_af = my_nn_relu_grad;
@@ -132,6 +133,7 @@ int main(int argc, char* argv[])
     printf("--------tanh-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_tanh;
@@ -155,6 +157,7 @@ int main(int argc, char* argv[])
     printf("--------sigmoid-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_sigmoid;
@@ -177,6 +180,7 @@ int main(int argc, char* argv[])
     printf("--------sin-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_sin;
@@ -199,6 +203,7 @@ int main(int argc, char* argv[])
     printf("--------sinc-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_sinc;
@@ -221,6 +226,7 @@ int main(int argc, char* argv[])
     printf("--------softplus-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_softplus;
@@ -243,6 +249,7 @@ int main(int argc, char* argv[])
     printf("--------identite courbe-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_idc;
@@ -265,10 +272,34 @@ int main(int argc, char* argv[])
     printf("--------leaky RELU-----\n");
     printf("--------------------------\n");
     printf("--------------------------\n");
+    srand(69);
 
 
     nn1.funcs.af = my_nn_leaky;
     nn1.funcs.grad_af = my_nn_leaky_grad;
+
+    my_nn_create(&nn1, dims);
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+
+    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------SILU-----\n");
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    srand(69);
+
+
+    nn1.funcs.af = my_nn_silu;
+    nn1.funcs.grad_af = my_nn_silu_grad;
 
     my_nn_create(&nn1, dims);
 
