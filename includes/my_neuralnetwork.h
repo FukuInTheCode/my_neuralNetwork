@@ -51,3 +51,5 @@ double my_nn_leaky_grad(double x);
 double my_nn_leaky(double x);
 double my_nn_silu_grad(double x);
 double my_nn_silu(double x);
+double my_nn_gelu_grad(double x);
+double my_nn_gelu(double x);
