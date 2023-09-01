@@ -7,7 +7,6 @@ static double square(double x)
 
 double my_nn_calc_error(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 {
-
     MAT_DECLA(p);
 
     my_nn_predict(nn, x, &p);
@@ -27,6 +26,8 @@ double my_nn_calc_error(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
     double res = my_matrix_sum(&diff_squared);
 
     res /= y->n;
+
+    my_matrix_free(4, &p, &neg_y, &diff, &diff_squared);
 
     return res;
 }
