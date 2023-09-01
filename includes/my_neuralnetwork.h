@@ -3,22 +3,6 @@
 
 #include "my_matrix.h"
 
-typedef enum {
-    linear,
-    relu,
-    sigmoid,
-    silu,
-    sin,
-    sinc,
-    tanh,
-    softplus,
-    gaussian,
-    bin,
-    idc,
-    gelu,
-    leaky
-} my_activ_type_t;
-
 typedef double (*double_func_double)(double);
 
 typedef struct {
