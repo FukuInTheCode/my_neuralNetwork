@@ -172,6 +172,28 @@ int main(int argc, char* argv[])
 
     my_nn_predict(&nn1, &features, &predicts);
     MAT_PRINT(predicts);
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+    printf("--------sin-----\n");
+    printf("--------------------------\n");
+    printf("--------------------------\n");
+
+
+    nn1.funcs.af = my_nn_sin;
+    nn1.funcs.grad_af = my_nn_sin_grad;
+
+    my_nn_create(&nn1, dims);
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
+
+    printf("took: %u\n", my_nn_train(&nn1, &features, &targets, &hparams));
+
+    printf("error: %lf\n", my_nn_calc_error(&nn1, &features, &targets));
+
+    my_nn_predict(&nn1, &features, &predicts);
+    MAT_PRINT(predicts);
 
     my_nn_free(&nn1);
 
