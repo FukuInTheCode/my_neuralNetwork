@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 
     my_nn_t nn;
 
-    nn.funcs.af = my_nn_sigmoid;
+    nn.funcs.af = my;
     nn.funcs.grad_af = my_nn_sig_grad;
     nn.size = 2;
 
