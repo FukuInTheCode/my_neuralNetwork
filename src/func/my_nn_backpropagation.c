@@ -14,9 +14,9 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 
     my_matrix_add(&dz, 2, &(nn->activations[nn->size - 1]), &neg_y);
 
+    MAT_FREE(neg_y);
 
     for (uint32_t i = nn->size - 1; i > 0; --i) {
-        // MAT_PRINT(dz);
         MAT_DECLA(at);
 
         my_matrix_transpose(&(nn->activations[i - 1]), &at);
@@ -32,6 +32,8 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
         my_matrix_sumrow(&dz, &summed_dz);
 
         my_matrix_multiplybyscalar(&summed_dz, 1.0 / m, &(nn->gradients_bias[i - 1]));
+
+        my_matrix_free(3, &at, &dz_dot_at, &summed_dz);
 
         if (i == 1) break;
 
@@ -54,5 +56,8 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
         my_matrix_applyfunc(&z, nn->funcs.grad_af, &grad_a);
 
         my_matrix_product_elementwise(&dz, 2, &wt_dot_dz, &grad_a);
+
+        my_matrix_free(5, &wt, &wt_dot_dz, &tmp, &z, &grad_a);
     }
+    MAT_FREE(dz);
 }
