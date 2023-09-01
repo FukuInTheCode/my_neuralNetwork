@@ -3,6 +3,22 @@
 
 #include "my_matrix.h"
 
+typedef enum {
+    linear,
+    relu,
+    sigmoid,
+    silu,
+    sin,
+    sinc,
+    tanh,
+    softplus,
+    gaussian,
+    bin,
+    idc,
+    gelu,
+    leaky
+} my_activ_type_t;
+
 typedef double (*double_func_double)(double);
 
 typedef struct {
@@ -29,7 +45,7 @@ void my_nn_create(my_nn_t *nn, uint32_t *dimensions);
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x);
 double my_nn_sigmoid(double x);
 double my_nn_relu(double x);
-double my_nn_sig_grad(double x);
+double my_nn_sigmoid_grad(double x);
 double my_nn_relu_grad(double x);
 void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y);
 uint32_t my_nn_train(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t *hp);

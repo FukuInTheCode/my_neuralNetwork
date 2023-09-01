@@ -5,7 +5,8 @@
         "stdlib.h": "c",
         "my_nn_predict.C": "cpp",
         "typeinfo": "c",
-        "my_nn_silu.C": "cpp"
+        "my_nn_silu.C": "cpp",
+        "cmath": "c"
     },
     "epilinter.tokenizer_address": "ws://54.36.183.139:8081"
 }

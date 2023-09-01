@@ -5,7 +5,7 @@ double my_nn_sigmoid(double x)
     return 1.0 / (1 + exp(-x));
 }
 
-double my_nn_sig_grad(double x)
+double my_nn_sigmoid_grad(double x)
 {
     return exp(-x) / pow(1 + exp(-x), 2);
 }
