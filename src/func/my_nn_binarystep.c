@@ -8,5 +8,5 @@ double my_nn_binarystep(double x)
 
 double my_nn_binarystep_grad(double x)
 {
-    return 0;
+    return x - x;
 }
