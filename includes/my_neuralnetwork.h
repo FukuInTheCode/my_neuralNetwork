@@ -36,4 +36,4 @@ void my_nn_predict(my_nn_t *nn, my_matrix_t *x, my_matrix_t *res);
 double my_nn_calc_error(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y);
 double my_nn_linear(double x);
 double my_nn_linear_grad(double x);
-
+void my_nn_free(my_nn_t *nn);
