@@ -4,22 +4,16 @@
 #include "./my_math.h"
 
 #define FALSE 0
+
 #define TRUE 1
 
 #define MAT_PRINT(A) my_matrix_print(1, &A)
+
 #define MAT_FREE(A) my_matrix_free(1, &A)
 
 #define MAT_PRINT_DIM(A) printf("%s's dim: m = %u, n = %u\n", A.name, A.m, A.n)
 
 #define MAT_DECLA(A) my_matrix_t A = {.n = 0, .m = 0, .name = #A}
-
-static inline __attribute__((always_inline)) void check_alloc(void *A)
-{
-    if (A == NULL) {
-        fprintf(stderr, "Memory allocation failed!");
-        exit(1);
-    }
-}
 
 typedef enum {
     my_false = FALSE,
@@ -96,6 +90,21 @@ void my_matrix_create_array(my_matrix_t **arr, char *common_name, \
                                 const uint32_t count, ...);
 void my_matrix_print_array(my_matrix_t **arr, uint8_t size);
 void my_matrix_fill_from_array(my_matrix_t *A, double *arr, uint32_t arr_size);
+void my_matrix_addcol_2(my_matrix_t *A, const uint32_t n);
+void my_matrix_addrow_2(my_matrix_t *A, const uint32_t n);
+void my_matrix_applyfunc_2(my_matrix_t *A, UnaryFunction func);
+void my_matrix_broadcasting_2(my_matrix_t *A, unsigned int m, \
+    unsigned int n);
+void my_matrix_inverse_2(my_matrix_t *A);
+void my_matrix_one_2(my_matrix_t *A);
+void my_matrix_powerint_2(my_matrix_t *A, const unsigned int n);
+void my_matrix_addscalar_2(my_matrix_t *A, double scalar);
+void my_matrix_sumcol_2(my_matrix_t *A);
+void my_matrix_sumrow_2(my_matrix_t *A);
+void my_matrix_swapcol_2(my_matrix_t *A, const unsigned int a, \
+    const unsigned int b);
+void my_matrix_swaprow_2(my_matrix_t *A, const unsigned int a, \
+    const unsigned int b);
 
 static inline __attribute__((always_inline)) char *init_str(char *str, int i)
 {
@@ -112,4 +121,12 @@ static inline __attribute__((always_inline)) char *init_str(char *str, int i)
         i = (i - i % 10) / 10;
     }
     return m_str;
+}
+
+static inline __attribute__((always_inline)) void check_alloc(void *A)
+{
+    if (A == NULL) {
+        fprintf(stderr, "Memory allocation failed!");
+        exit(1);
+    }
 }
