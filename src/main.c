@@ -53,6 +53,11 @@ double unknw_train_tar[] = {
     0
 };
 
+static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
+{
+    
+}
+
 int main(int argc, char* argv[])
 {
     srand(69);
