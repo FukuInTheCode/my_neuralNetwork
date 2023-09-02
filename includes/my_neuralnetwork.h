@@ -7,6 +7,7 @@ typedef double (*double_func_double)(double);
 
 typedef struct {
     uint32_t size;
+    uint32_t *dims;
     char *name;
     my_matrix_t *theta_arr;
     my_matrix_t *bias_arr;
@@ -25,7 +26,7 @@ typedef struct {
     double threshold;
 } my_params_t;
 
-void my_nn_create(my_nn_t *nn, uint32_t *dimensions);
+void my_nn_create(my_nn_t *nn);
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x);
 double my_nn_sigmoid(double x);
 double my_nn_relu(double x);

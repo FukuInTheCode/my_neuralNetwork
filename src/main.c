@@ -2,7 +2,7 @@
 
 static double fun(double x)
 {
-    return x * x;
+    return (x - 2) * (x * x - 2 * x - 7);
 }
 
 // AND - gates
@@ -69,10 +69,7 @@ static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t 
     printf("--------------------------\n");
     srand(69);
 
-    nn->size = 4;
-    uint32_t dims[] = {x->m, 10, 10, y->m};
-
-    my_nn_create(nn, dims);
+    my_nn_create(nn);
 
     printf("starting error: %lf\n", my_nn_calc_error(nn, x, y));
 
@@ -83,10 +80,10 @@ static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t 
     my_nn_predict(nn, x, &predicts);
     my_matrix_transpose_2(&predicts);
 
+    MAT_PRINT(predicts);
     my_matrix_multiplybyscalar_2(&predicts, max);
     my_matrix_addscalar_2(&predicts, min);
 
-    MAT_PRINT(predicts);
     MAT_FREE(predicts);
 }
 
@@ -105,7 +102,7 @@ int main(int argc, char* argv[])
     // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
 
     my_matrix_create(25, 1, 1, &features_tr);
-    my_matrix_randint(-10, 10, 1, &features_tr);
+    my_matrix_randint(10, 1, 1, &features_tr);
     my_matrix_applyfunc(&features_tr, fun, &targets_tr);
 
     MAT_PRINT(features_tr);
@@ -131,16 +128,21 @@ int main(int argc, char* argv[])
     printf("\n");
     printf("\n");
 
-    // MAT_PRINT(features_tr);
-    // MAT_PRINT(targets_tr);
+    MAT_PRINT(features_tr);
+    MAT_PRINT(targets_tr);
 
     my_params_t hparams = {
         .alpha = 1e-1,
-        .epoch = 50*1000,
+        .epoch = 1000,
         .threshold = 1e-3
     };
 
-    my_nn_t neuro = {.name = "leaky"};
+    my_nn_t neuro = {.name = "neuro"};
+
+    neuro.size = 4;
+    uint32_t dims[] = {features.m, 3, 3, features.m};
+
+    neuro.dims = dims;
 
     // neuro.funcs.af = my_nn_leaky;
     // neuro.funcs.grad_af = my_nn_leaky_grad;

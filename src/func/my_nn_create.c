@@ -11,8 +11,9 @@ static void alloc_arr(char *name, my_matrix_t **arr, uint32_t size)
     }
 }
 
-void my_nn_create(my_nn_t *nn, uint32_t *dimensions)
+void my_nn_create(my_nn_t *nn)
 {
+    uint32_t *dimensions = nn->dims;
     alloc_arr("W", &(nn->theta_arr), nn->size - 1);
     alloc_arr("b", &(nn->bias_arr), nn->size - 1);
     alloc_arr("A", &(nn->activations), nn->size);
