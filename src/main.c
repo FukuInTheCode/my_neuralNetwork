@@ -134,8 +134,8 @@ int main(int argc, char* argv[])
 
     my_nn_t neuro = {.name = "neuro"};
 
-    neuro.size = 4;
-    uint32_t dims[] = {features.m, 3, 3, targets.m};
+    neuro.size = 3;
+    uint32_t dims[] = {features.m, 2, targets.m};
 
     neuro.dims = dims;
 
@@ -144,6 +144,14 @@ int main(int argc, char* argv[])
     neuro.acti_type = base_type;
     neuro.funcs.af = my_nn_sin;
     neuro.funcs.grad_af = my_nn_sin_grad;
+
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    neuro.name = "sigmoid";
+
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_sigmoid;
+    neuro.funcs.grad_af = my_nn_sigmoid_grad;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
