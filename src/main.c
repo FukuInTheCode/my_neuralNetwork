@@ -66,7 +66,7 @@ static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t 
     printf("--------%s-----\n", nn->name);
     printf("--------------------------\n");
     printf("--------------------------\n");
-    srand(69);
+    srand(time(0));
 
     my_nn_create(nn);
 
@@ -147,30 +147,21 @@ int main(int argc, char* argv[])
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "elu a = 2";
+    neuro.name = "elu";
     neuro.acti_type = param_type;
     neuro.funcs.af_p = my_nn_elu;
     neuro.funcs.grad_af_p = my_nn_elu_grad;
-    double params[] = { 2 };
+    double params[] = { 2. };
     neuro.funcs.params = params;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "elu a = -1";
-    neuro.acti_type = param_type;
-    neuro.funcs.af_p = my_nn_elu;
-    neuro.funcs.grad_af_p = my_nn_elu_grad;
-    double params[] = { -1. };
-    neuro.funcs.params = params;
-
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
-
-    neuro.name = "prelu a = 2";
+    neuro.name = "prelu";
     neuro.acti_type = param_type;
     neuro.funcs.af_p = my_nn_prelu;
     neuro.funcs.grad_af_p = my_nn_prelu_grad;
-    double params[] = { 2 };
-    neuro.funcs.params = params;
+    double params3[] = { sqrt(2) };
+    neuro.funcs.params = params3;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
