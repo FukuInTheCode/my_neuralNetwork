@@ -1,5 +1,17 @@
 #include "../../includes\my.h"
 
+static apply_func_with_params(my_nn_t *nn, my_matrix_t *A, my_matrix_t *result)
+{
+
+    my_matrix_copy(A, result);
+
+    for (uint32_t i = 0; i < result->m; i++) {
+        for (uint32_t j = 0; j < result->n; j++) {
+            my_matrix_set(result, j, i, nn->funcs.af_p(result->arr[i][j], nn));
+        }
+    }
+}
+
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x)
 {
     my_matrix_copy(x, &(nn->activations[0]));
@@ -15,8 +27,7 @@ void my_nn_forward(my_nn_t *nn, my_matrix_t *x)
         if (nn->acti_type == base_type)
             my_matrix_applyfunc(&z, nn->funcs.af, &(nn->activations[i]));
         else
-            my_matrix_applyfunc(&z, nn->funcs.af_p, &(nn->activations[i]));
-
+            apply_func_with_params(nn, &z, &(nn->activations[i]));
 
         my_matrix_free(2, &tmp, &z);
     }
