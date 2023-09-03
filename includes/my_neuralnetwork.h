@@ -3,7 +3,13 @@
 
 #include "my_matrix.h"
 
-typedef double (*double_func_double)(double);
+typedef double (*activ_func_temp)(double);
+typedef double (*activ_func_temp2)(double);
+
+typedef enum {
+    base_type,
+    param_type
+} activ_f_type_t;
 
 typedef struct {
     uint32_t size;
@@ -14,9 +20,21 @@ typedef struct {
     my_matrix_t *activations;
     my_matrix_t *gradients_theta;
     my_matrix_t *gradients_bias;
+    activ_f_type_t acti_type;
     struct {
-        double_func_double af;
-        double_func_double grad_af;
+        union {
+            struct
+            {
+                activ_func_temp af;
+                activ_func_temp grad_af;
+            };
+            struct
+            {
+                double *params;
+                activ_func_temp2 af_p;
+                activ_func_temp2 grad_af_p;
+            };
+        };
     } funcs;
 } my_nn_t;
 

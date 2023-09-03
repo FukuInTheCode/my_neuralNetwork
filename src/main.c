@@ -150,11 +150,14 @@ int main(int argc, char* argv[])
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     neuro.name = "sin";
-
+    neuro.acti_type = base;
     neuro.funcs.af = my_nn_sin;
     neuro.funcs.grad_af = my_nn_sin_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    printf("%lf\n", neuro.funcs.af(0));
+    printf("%lf\n", neuro.funcs.af(0));
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "relu";
 
