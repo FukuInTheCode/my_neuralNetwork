@@ -79,3 +79,5 @@ double my_nn_binarystep_grad(double x);
 double my_nn_binarystep(double x);
 double my_nn_elu_grad(double *params, double x);
 double my_nn_elu(double *params, double x);
+double my_nn_prelu_grad(double *params, double x);
+double my_nn_prelu(double *params, double x);
