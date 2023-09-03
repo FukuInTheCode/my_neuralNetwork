@@ -172,13 +172,22 @@ int main(int argc, char* argv[])
     neuro.funcs.params = params3;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
-    
+
     neuro.name = "selu";
     neuro.acti_type = param_type;
     neuro.funcs.af_p = my_nn_selu;
     neuro.funcs.grad_af_p = my_nn_selu_grad;
     double params4[] = { 1.0507, 1.67326 };
     neuro.funcs.params = params4;
+
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    neuro.name = "soft exp";
+    neuro.acti_type = param_type;
+    neuro.funcs.af_p = my_nn_softexp;
+    neuro.funcs.grad_af_p = my_nn_softexp_grad;
+    double params5[] = { 0.138 };
+    neuro.funcs.params = params5;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
