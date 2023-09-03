@@ -1,3 +1,4 @@
+#define NN_STATIC
 #include "../../includes\my.h"
 
 void my_nn_forward(my_nn_t *nn, my_matrix_t *x)

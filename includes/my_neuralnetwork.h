@@ -85,7 +85,6 @@ double my_nn_elu(double *params, double x);
 static void apply_func_with_params(my_nn_t *nn, my_matrix_t *A,\
                                                 my_matrix_t *result)
 {
-
     my_matrix_copy(A, result);
 
     for (uint32_t i = 0; i < result->m; i++) {
