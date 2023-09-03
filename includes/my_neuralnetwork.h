@@ -3,8 +3,10 @@
 
 #include "my_matrix.h"
 
+typedef struct my_nn_t;
+
 typedef double (*activ_func_temp)(double);
-typedef double (*activ_func_temp2)(double);
+typedef double (*activ_func_temp2)(my_nn_t *, double);
 
 typedef enum {
     base_type,

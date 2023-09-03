@@ -7,7 +7,7 @@ static apply_func_with_params(my_nn_t *nn, my_matrix_t *A, my_matrix_t *result)
 
     for (uint32_t i = 0; i < result->m; i++) {
         for (uint32_t j = 0; j < result->n; j++) {
-            my_matrix_set(result, j, i, nn->funcs.af_p(result->arr[i][j], nn));
+            my_matrix_set(result, j, i, nn->funcs.af_p(nn, result->arr[i][j]));
         }
     }
 }
