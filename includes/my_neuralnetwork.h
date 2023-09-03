@@ -85,3 +85,5 @@ double my_nn_selu(double *params, double x);
 double my_nn_selu_grad(double *params, double x);
 double my_nn_softexp_grad(double *params, double x);
 double my_nn_softexp(double *params, double x);
+double my_nn_softsign(double x);
+double my_nn_softsign_grad(double x);
