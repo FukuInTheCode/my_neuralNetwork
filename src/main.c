@@ -149,10 +149,11 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "sin";
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_sin;
-    neuro.funcs.grad_af = my_nn_sin_grad;
+    neuro.name = "elu";
+    neuro.acti_type = param_type;
+    neuro.funcs.af = my_nn_elu;
+    neuro.funcs.grad_af = my_nn_elu_grad;
+    neuro.funcs.params = { 1 };
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
