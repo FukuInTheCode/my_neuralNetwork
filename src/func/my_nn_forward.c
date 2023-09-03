@@ -12,7 +12,11 @@ void my_nn_forward(my_nn_t *nn, my_matrix_t *x)
 
         my_matrix_add(&z, 2, &tmp, &(nn->bias_arr[i - 1]));
 
-        my_matrix_applyfunc(&z, nn->funcs.af, &(nn->activations[i]));
+        if (nn->acti_type == base_type)
+            my_matrix_applyfunc(&z, nn->funcs.af, &(nn->activations[i]));
+        else
+            my_matrix_applyfunc(&z, nn->funcs.af_p, &(nn->activations[i]));
+
 
         my_matrix_free(2, &tmp, &z);
     }
