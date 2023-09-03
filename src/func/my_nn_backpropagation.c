@@ -1,5 +1,18 @@
 #include "../../includes/my.h"
 
+static void apply_func_with_params(my_nn_t *nn, my_matrix_t *A,\
+                                                my_matrix_t *result)
+{
+    my_matrix_copy(A, result);
+
+    for (uint32_t i = 0; i < result->m; i++) {
+        for (uint32_t j = 0; j < result->n; j++) {
+            my_matrix_set(result, j, i, nn->funcs.af_p(nn->funcs.params, \
+                                                        result->arr[i][j]));
+        }
+    }
+}
+
 void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 {
     my_nn_forward(nn, x);
@@ -55,7 +68,8 @@ void my_nn_backprogation(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y)
 
         if (nn->acti_type == base_type)
             my_matrix_applyfunc(&z, nn->funcs.grad_af, &grad_a);
-        else 
+        else
+            apply_func_with_params(nn, &z, &grad_a);
 
         my_matrix_product_elementwise(&dz, 2, &wt_dot_dz, &grad_a);
 

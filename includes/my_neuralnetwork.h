@@ -79,20 +79,3 @@ double my_nn_binarystep_grad(double x);
 double my_nn_binarystep(double x);
 double my_nn_elu_grad(double *params, double x);
 double my_nn_elu(double *params, double x);
-
-#ifdef NN_STATIC
-
-static void apply_func_with_params(my_nn_t *nn, my_matrix_t *A,\
-                                                my_matrix_t *result)
-{
-    my_matrix_copy(A, result);
-
-    for (uint32_t i = 0; i < result->m; i++) {
-        for (uint32_t j = 0; j < result->n; j++) {
-            my_matrix_set(result, j, i, nn->funcs.af_p(nn->funcs.params, \
-                                                        result->arr[i][j]));
-        }
-    }
-}
-
-#endif
