@@ -147,6 +147,14 @@ int main(int argc, char* argv[])
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
+    neuro.name = "soft sign";
+
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_softsign;
+    neuro.funcs.grad_af = my_nn_softsign_grad;
+
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
     neuro.name = "sigmoid";
 
     neuro.acti_type = base_type;

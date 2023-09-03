@@ -87,3 +87,5 @@ double my_nn_softexp_grad(double *params, double x);
 double my_nn_softexp(double *params, double x);
 double my_nn_softsign(double x);
 double my_nn_softsign_grad(double x);
+double my_nn_atan_grad(double x);
+double my_nn_atan(double x);
