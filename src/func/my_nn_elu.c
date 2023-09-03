@@ -6,7 +6,7 @@ double my_nn_elu(double *params, double x)
     return x;
 }
 
-double my_nn_elu_grad(double *param, double x)
+double my_nn_elu_grad(double *params, double x)
 {
     if (x <= 0) return params[0] * exp(x);
     return 1.;

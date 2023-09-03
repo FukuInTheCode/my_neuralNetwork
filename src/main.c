@@ -151,11 +151,20 @@ int main(int argc, char* argv[])
 
     neuro.name = "elu";
     neuro.acti_type = param_type;
-    neuro.funcs.af = my_nn_elu;
-    neuro.funcs.grad_af = my_nn_elu_grad;
-    neuro.funcs.params = { 1 };
+    neuro.funcs.af_p = my_nn_elu;
+    neuro.funcs.grad_af_p = my_nn_elu_grad;
+    double params[] = { 2 };
+    neuro.funcs.params = params;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    my_nn_create(&neuro);
+
+    MAT_DECLA(pre);
+
+    my_nn_predict(&neuro, &features, &pre);
+
+    MAT_PRINT(pre);
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "relu";
 
