@@ -62,9 +62,9 @@ void my_matrix_addcol(my_matrix_t *A, uint32_t const n, my_matrix_t *result);
 void my_matrix_addrow(my_matrix_t *A, uint32_t const m, my_matrix_t *result);
 void my_matrix_concatcol(my_matrix_t *result, my_matrix_t *A, my_matrix_t *B);
 void my_matrix_concatrow(my_matrix_t *result, my_matrix_t *A, my_matrix_t *B);
-int my_matrix_equals(my_matrix_t *A, my_matrix_t *B);
-void my_matrix_swaprow(my_matrix_t *A, const unsigned int a, \
-    const unsigned int b, my_matrix_t *result);
+my_bool_t my_matrix_equals(my_matrix_t *A, my_matrix_t *B);
+void my_matrix_swaprow(my_matrix_t *A, uint32_t const a, \
+    uint32_t const b, my_matrix_t *result);
 void my_matrix_swapcol(my_matrix_t *A, const unsigned int a,\
     const unsigned int b, my_matrix_t *result);
 void my_matrix_sumcol(my_matrix_t *A, my_matrix_t *result);
