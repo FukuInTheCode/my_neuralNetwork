@@ -108,6 +108,8 @@ void my_matrix_swaprow_2(my_matrix_t *A, const unsigned int a, \
 void my_matrix_multiplybyscalar_2(my_matrix_t *A, double scalar);
 void my_matrix_transpose_2(my_matrix_t *A);
 
+#ifdef MATRIX_INIT_STR
+
 static inline __attribute__((always_inline)) char *init_str(char *str, int i)
 {
     size_t ite = (size_t)log10(i == 0 ? 1 : i) + 1;
@@ -125,6 +127,9 @@ static inline __attribute__((always_inline)) char *init_str(char *str, int i)
     return m_str;
 }
 
+#endif
+
+#ifdef MATRIX_CHECK_ALLOC
 static inline __attribute__((always_inline)) void check_alloc(void *A)
 {
     if (A == NULL) {
@@ -132,3 +137,4 @@ static inline __attribute__((always_inline)) void check_alloc(void *A)
         exit(1);
     }
 }
+#endif
