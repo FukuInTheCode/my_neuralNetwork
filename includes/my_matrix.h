@@ -27,7 +27,7 @@ typedef struct my_matrix {
     double **arr;
 } my_matrix_t;
 
-typedef double (*UnaryFunction)(double);
+typedef double (*temp_func)(double);
 
 void my_matrix_create(unsigned int m, unsigned int n, \
     const unsigned int count, ...);
@@ -56,7 +56,7 @@ void my_matrix_getsubmatrix(my_matrix_t *A, \
 void my_matrix_adjugate(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_inverse(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_addscalar(my_matrix_t *A, double scalar, my_matrix_t *result);
-void my_matrix_applyfunc(my_matrix_t *A, UnaryFunction func, \
+void my_matrix_applyfunc(my_matrix_t *A, temp_func func, \
     my_matrix_t *result);
 double my_matrix_sum(my_matrix_t *A);
 void my_matrix_one(my_matrix_t *A, my_matrix_t *result);
@@ -92,7 +92,7 @@ void my_matrix_print_array(my_matrix_t **arr, uint8_t size);
 void my_matrix_fill_from_array(my_matrix_t *A, double *arr, uint32_t arr_size);
 void my_matrix_addcol_2(my_matrix_t *A, const uint32_t n);
 void my_matrix_addrow_2(my_matrix_t *A, const uint32_t n);
-void my_matrix_applyfunc_2(my_matrix_t *A, UnaryFunction func);
+void my_matrix_applyfunc_2(my_matrix_t *A, temp_func func);
 void my_matrix_broadcasting_2(my_matrix_t *A, unsigned int m, \
     unsigned int n);
 void my_matrix_inverse_2(my_matrix_t *A);
