@@ -49,9 +49,8 @@ void my_matrix_randint(int const minN, int const maxN, \
     uint32_t const count, ...);
 void my_matrix_randfloat(double const minN, double const maxN,\
     uint32_t const count, ...);
-double my_matrix_det(my_matrix_t *A);
-void my_matrix_getsubmatrix(my_matrix_t *A, \
-    const unsigned int m, const unsigned int n, my_matrix_t *result);
+void my_matrix_getsubmatrix(my_matrix_t *A, uint32_t const m, \
+    uint32_t const n, my_matrix_t *result);
 void my_matrix_adjugate(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_inverse(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_addscalar(my_matrix_t *A, double scalar, my_matrix_t *result);
