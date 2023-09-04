@@ -10,5 +10,6 @@ double my_nn_gelu(double x)
 
 double my_nn_gelu_grad(double x)
 {
-    return 1. / 2. * (1 + erf(x / SQRT2)) + exp(-1 * pow(x, 2) / 2) * x / SQRT2PI;
+    return 1. / 2. * (1 + erf(x / SQRT2)) + exp(-1 * pow(x, 2) / 2)\
+                                                        * x / SQRT2PI;
 }

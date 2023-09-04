@@ -20,7 +20,8 @@ void my_nn_create(my_nn_t *nn)
     alloc_arr("db", &(nn->gradients_bias), nn->size - 1);
     alloc_arr("dW", &(nn->gradients_theta), nn->size - 1);
     for (uint32_t i = 0; i < nn->size - 1; ++i) {
-        my_matrix_create(dimensions[i + 1], dimensions[i], 1, &(nn->theta_arr[i]));
+        my_matrix_create(dimensions[i + 1], dimensions[i], 1,\
+                                            &(nn->theta_arr[i]));
         my_matrix_randfloat(0, 1, 1, &(nn->theta_arr[i]));
         my_matrix_create(dimensions[i + 1], 1, 1, &(nn->bias_arr[i]));
         my_matrix_randfloat(0, 1, 1, &(nn->bias_arr[i]));
