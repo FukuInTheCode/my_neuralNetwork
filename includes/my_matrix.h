@@ -97,10 +97,10 @@ void my_matrix_powerint_2(my_matrix_t *A, uint32_t const n);
 void my_matrix_addscalar_2(my_matrix_t *A, double scalar);
 void my_matrix_sumcol_2(my_matrix_t *A);
 void my_matrix_sumrow_2(my_matrix_t *A);
-void my_matrix_swapcol_2(my_matrix_t *A, const unsigned int a, \
-    const unsigned int b);
-void my_matrix_swaprow_2(my_matrix_t *A, const unsigned int a, \
-    const unsigned int b);
+void my_matrix_swapcol_2(my_matrix_t *A, uint32_t const a, \
+    uint32_t const b);
+void my_matrix_swaprow_2(my_matrix_t *A, uint32_t const a, \
+    uint32_t const b);
 void my_matrix_multiplybyscalar_2(my_matrix_t *A, double scalar);
 void my_matrix_transpose_2(my_matrix_t *A);
 
