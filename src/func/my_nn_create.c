@@ -1,3 +1,5 @@
+#define MATRIX_INIT_STR
+#define MATRIX_CHECK_ALLOC
 #include "../../includes/my.h"
 
 static void alloc_arr(char *name, my_matrix_t **arr, uint32_t size)
