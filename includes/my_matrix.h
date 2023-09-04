@@ -40,7 +40,7 @@ void my_matrix_multiplybyscalar(my_matrix_t *A, double scalar, \
     my_matrix_t *result);
 void my_matrix_add(my_matrix_t *result, uint32_t const count, ...);
 void my_matrix_transpose(my_matrix_t *A, my_matrix_t* T);
-void my_matrix_getcolumn(my_matrix_t *A, unsigned int n, double result[]);
+void my_matrix_getcolumn(my_matrix_t *A, uint32_t n, double result[]);
 double* my_matrix_getrow(my_matrix_t *A, unsigned int i);
 void my_matrix_product(my_matrix_t *result, const unsigned int count, ...);
 void my_matrix_copy(my_matrix_t *A, my_matrix_t *copy);
