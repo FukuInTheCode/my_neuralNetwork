@@ -143,13 +143,13 @@ int main(int argc, char* argv[])
 
     neuro.dims = dims;
 
-    neuro.name = "sin";
+    // neuro.name = "sin";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_sin;
-    neuro.funcs.grad_af = my_nn_sin_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_sin;
+    // neuro.funcs.grad_af = my_nn_sin_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "atan";
 
@@ -183,7 +183,7 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "gelu";
+    // neuro.name = "gelu";
 
     neuro.acti_type = base_type;
     neuro.funcs.af = my_nn_gelu;
@@ -192,13 +192,13 @@ int main(int argc, char* argv[])
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
 
-    neuro.name = "idc";
+    // neuro.name = "idc";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_idc;
-    neuro.funcs.grad_af = my_nn_idc_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_idc;
+    // neuro.funcs.grad_af = my_nn_idc_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "leaky";
 
@@ -224,21 +224,21 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "silu";
+    // neuro.name = "silu";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_silu;
-    neuro.funcs.grad_af = my_nn_silu_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_silu;
+    // neuro.funcs.grad_af = my_nn_silu_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "sinc";
+    // neuro.name = "sinc";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_sinc;
-    neuro.funcs.grad_af = my_nn_sinc_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_sinc;
+    // neuro.funcs.grad_af = my_nn_sinc_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "soft plus";
 
@@ -248,13 +248,13 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "tanh";
+    // neuro.name = "tanh";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_tanh;
-    neuro.funcs.grad_af = my_nn_tanh_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_tanh;
+    // neuro.funcs.grad_af = my_nn_tanh_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "elu";
     // neuro.acti_type = param_type;
@@ -274,23 +274,25 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "selu";
-    neuro.acti_type = param_type;
-    neuro.funcs.af_p = my_nn_selu;
-    neuro.funcs.grad_af_p = my_nn_selu_grad;
-    double params4[] = { 1.0507, 1.67326 };
-    neuro.funcs.params = params4;
+    // neuro.name = "selu";
+    // neuro.acti_type = param_type;
+    // neuro.funcs.af_p = my_nn_selu;
+    // neuro.funcs.grad_af_p = my_nn_selu_grad;
+    // double params4[] = { 1.0507, 1.67326 };
+    // neuro.funcs.params = params4;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "soft exp";
-    neuro.acti_type = param_type;
-    neuro.funcs.af_p = my_nn_softexp;
-    neuro.funcs.grad_af_p = my_nn_softexp_grad;
-    double params5[] = { 0.138 };
-    neuro.funcs.params = params5;
+    // neuro.name = "soft exp";
+    // neuro.acti_type = param_type;
+    // neuro.funcs.af_p = my_nn_softexp;
+    // neuro.funcs.grad_af_p = my_nn_softexp_grad;
+    // double params5[] = { 0.138 };
+    // neuro.funcs.params = params5;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    my_nn_print(&neuro);
 
     my_nn_free(&neuro);
 
