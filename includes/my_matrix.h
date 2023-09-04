@@ -59,8 +59,7 @@ void my_matrix_applyfunc(my_matrix_t *A, temp_func func, \
 double my_matrix_sum(my_matrix_t *A);
 void my_matrix_one(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_addcol(my_matrix_t *A, uint32_t const n, my_matrix_t *result);
-void my_matrix_addrow(my_matrix_t *A, const unsigned int m, \
-    my_matrix_t *result);
+void my_matrix_addrow(my_matrix_t *A, uint32_t const m, my_matrix_t *result);
 void my_matrix_concatcol(my_matrix_t *result, my_matrix_t *A, my_matrix_t *B);
 void my_matrix_concatrow(my_matrix_t *result, my_matrix_t *A, my_matrix_t *B);
 int my_matrix_equals(my_matrix_t *A, my_matrix_t *B);
