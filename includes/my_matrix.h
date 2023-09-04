@@ -34,7 +34,7 @@ void my_matrix_create(uint32_t m, uint32_t n, \
 void my_matrix_identity(uint32_t const count, ...);
 void my_matrix_set(my_matrix_t *A, uint32_t const x,\
                         uint32_t const y, double const  n);
-void my_matrix_print(const unsigned int count, ...);
+void my_matrix_print(uint32_t const count, ...);
 void my_matrix_free(const unsigned int count, ...);
 void my_matrix_multiplybyscalar(my_matrix_t *A, double scalar, \
     my_matrix_t *result);
