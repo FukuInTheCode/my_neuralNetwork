@@ -75,8 +75,8 @@ void my_matrix_broadcasting(my_matrix_t *A, uint32_t m, \
     uint32_t n, my_matrix_t *result);
 double my_matrix_max(my_matrix_t *A);
 double my_matrix_min(my_matrix_t *A);
-void my_matrix_product_elementwise(my_matrix_t *result,\
-    const unsigned int count, ...);
+void my_matrix_product_elementwise(my_matrix_t *result, \
+    uint32_t const count, ...);
 double my_matrix_maxcol(my_matrix_t *A, const unsigned int n);
 double my_matrix_maxrow(my_matrix_t *A, const unsigned int m);
 double my_matrix_mincol(my_matrix_t *A, const unsigned int n);
