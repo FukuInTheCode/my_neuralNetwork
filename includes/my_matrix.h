@@ -44,8 +44,7 @@ void my_matrix_getcolumn(my_matrix_t *A, uint32_t n, double result[]);
 double *my_matrix_getrow(my_matrix_t *A, uint32_t i);
 void my_matrix_product(my_matrix_t* result, uint32_t const count, ...);
 void my_matrix_copy(my_matrix_t *A, my_matrix_t *copy);
-void my_matrix_powerint(my_matrix_t *A, const unsigned int n, \
-    my_matrix_t *result);
+void my_matrix_powerint(my_matrix_t *A, uint32_t const n, my_matrix_t *result);
 void my_matrix_randint(const int minN, const int maxN,\
     const unsigned int count, ...);
 void my_matrix_randfloat(const double minN, const double maxN, \
