@@ -71,8 +71,8 @@ void my_matrix_sumcol(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_sumrow(my_matrix_t *A, my_matrix_t *result);
 void my_matrix_setrow(my_matrix_t *A, uint32_t const m, double const x);
 void my_matrix_setcol(my_matrix_t *A, uint32_t const n, double const x);
-void my_matrix_broadcasting(my_matrix_t *A, const unsigned int m, \
-    const unsigned int n, my_matrix_t *result);
+void my_matrix_broadcasting(my_matrix_t *A, uint32_t m, \
+    uint32_t n, my_matrix_t *result);
 double my_matrix_max(my_matrix_t *A);
 double my_matrix_min(my_matrix_t *A);
 void my_matrix_product_elementwise(my_matrix_t *result,\
