@@ -29,8 +29,8 @@ typedef struct my_matrix {
 
 typedef double (*temp_func)(double);
 
-void my_matrix_create(unsigned int m, unsigned int n, \
-    const unsigned int count, ...);
+void my_matrix_create(uint32_t m, uint32_t n, \
+    uint32_t const count, ...);
 void my_matrix_identity(const unsigned int count, ...);
 void my_matrix_set(my_matrix_t *A, const unsigned int x, \
     const unsigned int y, const double n);
