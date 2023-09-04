@@ -77,11 +77,11 @@ double my_matrix_max(my_matrix_t *A);
 double my_matrix_min(my_matrix_t *A);
 void my_matrix_product_elementwise(my_matrix_t *result, \
     uint32_t const count, ...);
-double my_matrix_maxcol(my_matrix_t *A, const unsigned int n);
-double my_matrix_maxrow(my_matrix_t *A, const unsigned int m);
-double my_matrix_mincol(my_matrix_t *A, const unsigned int n);
-double my_matrix_minrow(my_matrix_t *A, const unsigned int m);
-void my_matrix_free_array(my_matrix_t **arr, uint8_t size);
+double my_matrix_maxcol(my_matrix_t *A, uint32_t const n);
+double my_matrix_maxrow(my_matrix_t *A, uint32_t const m);
+double my_matrix_mincol(my_matrix_t *A, uint32_t const n);
+double my_matrix_minrow(my_matrix_t *A, uint32_t const m);
+void my_matrix_free_array(my_matrix_t **arr, uint32_t size);
 void my_matrix_create_array(my_matrix_t **arr, char *common_name, \
                                 const uint32_t count, ...);
 void my_matrix_print_array(my_matrix_t **arr, uint8_t size);
