@@ -86,7 +86,7 @@ void my_matrix_create_array(my_matrix_t **arr, char *common_name, \
                                 const uint32_t count, ...);
 void my_matrix_print_array(my_matrix_t **arr, uint32_t size);
 void my_matrix_fill_from_array(my_matrix_t *A, double *arr, uint32_t arr_size);
-void my_matrix_addcol_2(my_matrix_t *A, const uint32_t n);
+void my_matrix_addcol_2(my_matrix_t *A, uint32_t const n);
 void my_matrix_addrow_2(my_matrix_t *A, const uint32_t n);
 void my_matrix_applyfunc_2(my_matrix_t *A, temp_func func);
 void my_matrix_broadcasting_2(my_matrix_t *A, unsigned int m, \
