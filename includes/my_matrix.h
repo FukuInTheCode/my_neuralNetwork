@@ -93,7 +93,7 @@ void my_matrix_broadcasting_2(my_matrix_t *A, uint32_t m, \
     uint32_t n);
 void my_matrix_inverse_2(my_matrix_t *A);
 void my_matrix_one_2(my_matrix_t *A);
-void my_matrix_powerint_2(my_matrix_t *A, const unsigned int n);
+void my_matrix_powerint_2(my_matrix_t *A, uint32_t const n);
 void my_matrix_addscalar_2(my_matrix_t *A, double scalar);
 void my_matrix_sumcol_2(my_matrix_t *A);
 void my_matrix_sumrow_2(my_matrix_t *A);
