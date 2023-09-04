@@ -1,9 +1,9 @@
 #include "../includes/my.h"
 
-// static double fun(double x)
-// {
-//     return ;
-// }
+static double fun(double x)
+{
+    return x * x;
+}
 
 // AND - gates
 double and_train_fea[] = {
@@ -70,11 +70,11 @@ static void test_model(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y, my_params_t 
 
     my_nn_create(nn);
 
-    printf("starting error: %lf\n", my_nn_calc_error(nn, x, y));
+    printf("starting error: %.10lf\n", my_nn_calc_error(nn, x, y));
 
-    printf("took: %u\n", my_nn_train(nn, x, y, hp));
+    printf("%u\n", my_nn_train(nn, x, y, hp));
 
-    printf("ending error: %lf\n", my_nn_calc_error(nn, x, y));
+    printf("ending error: %.10lf\n", my_nn_calc_error(nn, x, y));
 
     MAT_DECLA(predicts);
     my_nn_predict(nn, x, &predicts);
@@ -99,14 +99,18 @@ int main(int argc, char* argv[])
     MAT_DECLA(targets_tr);
     MAT_DECLA(targets);
 
-    my_matrix_create(4, 2, 1, &features_tr);
-    my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
-    my_matrix_create(4, 1, 1, &targets_tr);
-    my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
+    // my_matrix_create(4, 2, 1, &features_tr);
+    // my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
+    // my_matrix_create(4, 1, 1, &targets_tr);
+    // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
 
-    // my_matrix_create(25, 1, 1, &features_tr);
-    // my_matrix_randint(10, 1, 1, &features_tr);
+    my_matrix_create(25, 2, 1, &features_tr);
+    my_matrix_create(25, 1, 1, &targets_tr);
+    my_matrix_randint(10, -10, 1, &features_tr);
     // my_matrix_applyfunc(&features_tr, fun, &targets_tr);
+
+    for (uint32_t i = 0; i < targets_tr.m; ++i)
+        my_matrix_set(&targets_tr, 0, i, features_tr.arr[i][0] * features_tr.arr[i][1]);
 
     MAT_PRINT(features_tr);
     MAT_PRINT(targets_tr);
@@ -129,13 +133,13 @@ int main(int argc, char* argv[])
     my_params_t hparams = {
         .alpha = 1e-1,
         .epoch = 10*1000,
-        .threshold = 1e-3
+        .threshold = 1e-4
     };
 
     my_nn_t neuro = {.name = "neuro"};
 
-    neuro.size = 3;
-    uint32_t dims[] = {features.m, 2, targets.m};
+    neuro.size = 4;
+    uint32_t dims[] = {features.m, 2, 2, targets.m};
 
     neuro.dims = dims;
 
@@ -147,39 +151,128 @@ int main(int argc, char* argv[])
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "soft sign";
+    // neuro.name = "atan";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_atan;
+    // neuro.funcs.grad_af = my_nn_atan_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "soft sign";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_softsign;
+    // neuro.funcs.grad_af = my_nn_softsign_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "sigmoid";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_sigmoid;
+    // neuro.funcs.grad_af = my_nn_sigmoid_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "bin";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_binarystep;
+    // neuro.funcs.grad_af = my_nn_binarystep_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    neuro.name = "gelu";
 
     neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_softsign;
-    neuro.funcs.grad_af = my_nn_softsign_grad;
+    neuro.funcs.af = my_nn_gelu;
+    neuro.funcs.grad_af = my_nn_gelu_grad;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "sigmoid";
+
+    neuro.name = "idc";
 
     neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_sigmoid;
-    neuro.funcs.grad_af = my_nn_sigmoid_grad;
+    neuro.funcs.af = my_nn_idc;
+    neuro.funcs.grad_af = my_nn_idc_grad;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "elu";
-    neuro.acti_type = param_type;
-    neuro.funcs.af_p = my_nn_elu;
-    neuro.funcs.grad_af_p = my_nn_elu_grad;
-    double params[] = { 2. };
-    neuro.funcs.params = params;
+    // neuro.name = "leaky";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_leaky;
+    // neuro.funcs.grad_af = my_nn_leaky_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "linear";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_linear;
+    // neuro.funcs.grad_af = my_nn_linear_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "relu";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_relu;
+    // neuro.funcs.grad_af = my_nn_relu_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    neuro.name = "silu";
+
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_silu;
+    neuro.funcs.grad_af = my_nn_silu_grad;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    neuro.name = "prelu";
-    neuro.acti_type = param_type;
-    neuro.funcs.af_p = my_nn_prelu;
-    neuro.funcs.grad_af_p = my_nn_prelu_grad;
-    double params3[] = { sqrt(2) };
-    neuro.funcs.params = params3;
+    neuro.name = "sinc";
+
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_sinc;
+    neuro.funcs.grad_af = my_nn_sinc_grad;
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "soft plus";
+
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_softplus;
+    // neuro.funcs.grad_af = my_nn_softplus_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    neuro.name = "tanh";
+
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_tanh;
+    neuro.funcs.grad_af = my_nn_tanh_grad;
+
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "elu";
+    // neuro.acti_type = param_type;
+    // neuro.funcs.af_p = my_nn_elu;
+    // neuro.funcs.grad_af_p = my_nn_elu_grad;
+    // double params[] = { 2. };
+    // neuro.funcs.params = params;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+
+    // neuro.name = "prelu";
+    // neuro.acti_type = param_type;
+    // neuro.funcs.af_p = my_nn_prelu;
+    // neuro.funcs.grad_af_p = my_nn_prelu_grad;
+    // double params3[] = { sqrt(2) };
+    // neuro.funcs.params = params3;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     neuro.name = "selu";
     neuro.acti_type = param_type;
