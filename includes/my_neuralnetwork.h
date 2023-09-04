@@ -21,19 +21,17 @@ typedef struct {
     my_matrix_t *gradients_theta;
     my_matrix_t *gradients_bias;
     activ_f_type_t acti_type;
-    struct {
-        union {
-            struct
-            {
-                activ_func_temp af;
-                activ_func_temp grad_af;
-            };
-            struct
-            {
-                double *params;
-                activ_func_temp2 af_p;
-                activ_func_temp2 grad_af_p;
-            };
+    union {
+        struct
+        {
+            activ_func_temp af;
+            activ_func_temp grad_af;
+        };
+        struct
+        {
+            double *params;
+            activ_func_temp2 af_p;
+            activ_func_temp2 grad_af_p;
         };
     } funcs;
 } my_nn_t;
