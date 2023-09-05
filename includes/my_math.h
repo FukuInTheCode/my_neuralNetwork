@@ -1,6 +1,5 @@
 #pragma once
 #define MYMATHH
-
 #include <math.h>
 
 #define ll long long
@@ -20,7 +19,6 @@ static inline __attribute__((always_inline)) void swap(double *a, double *b)
 }
 
 typedef double (*math_function)(double);
-
 typedef enum {
     inf,
     minus_inf,
@@ -48,3 +46,7 @@ double my_abs(double x);
 int my_gcd(int a, int b);
 double my_func_max(math_function func, double start, double end);
 double my_func_min(math_function func, double start, double end);
+double my_max(double *x, size_t size);
+double my_max_between(double x1, double x2);
+double my_min_between(double x1, double x2);
+double my_min(double *x, size_t size);
