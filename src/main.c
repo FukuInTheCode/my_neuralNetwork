@@ -104,13 +104,13 @@ int main(int argc, char* argv[])
     // my_matrix_create(4, 1, 1, &targets_tr);
     // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
 
-    // my_matrix_create(25, 2, 1, &features_tr);
-    // my_matrix_create(25, 1, 1, &targets_tr);
-    // my_matrix_randint(10, -10, 1, &features_tr);
+    my_matrix_create(25, 2, 1, &features_tr);
+    my_matrix_create(25, 1, 1, &targets_tr);
+    my_matrix_randint(10, -10, 1, &features_tr);
     // my_matrix_applyfunc(&features_tr, fun, &targets_tr);
 
     for (uint32_t i = 0; i < targets_tr.m; ++i)
-        my_matrix_set(&targets_tr, 0, i, features_tr.arr[i][0] * features_tr.arr[i][1]);
+        my_matrix_set(&targets_tr, i, 0, features_tr.arr[i][0] * features_tr.arr[i][1]);
 
     MAT_PRINT(features_tr);
     MAT_PRINT(targets_tr);
@@ -136,14 +136,14 @@ int main(int argc, char* argv[])
         .threshold = 1e-4
     };
 
-    my_nn_t neuro = {.name = "neuro"};
+    NN_DECLA(neuro);
 
     neuro.size = 4;
     uint32_t dims[] = {features.m, 2, 2, targets.m};
 
     neuro.dims = dims;
 
-    neuro.name = "sin";
+    // neuro.name = "sin";
 
     neuro.acti_type = base_type;
     neuro.funcs.af = my_nn_sin;
