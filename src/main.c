@@ -133,7 +133,8 @@ int main(int argc, char* argv[])
     my_params_t hparams = {
         .alpha = 1e-1,
         .epoch = 10*1000,
-        .threshold = 1e-4
+        .threshold = 1e-4,
+        .show_tqdm = true
     };
 
     NN_DECLA(neuro);
