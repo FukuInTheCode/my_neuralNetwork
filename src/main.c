@@ -138,23 +138,26 @@ int main(int argc, char* argv[])
     };
 
     NN_DECLA(neuro);
+    NN_DECLA(cpy);
 
     neuro.size = 3;
     uint32_t dims[] = {features.m, 2, targets.m};
 
     neuro.dims = dims;
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_sin;
-    neuro.funcs.grad_af = my_nn_sin_grad;
+    my_nn_copy(&neuro, &cpy);
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_sin;
+    // neuro.funcs.grad_af = my_nn_sin_grad;
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_atan;
-    neuro.funcs.grad_af = my_nn_atan_grad;
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_atan;
+    // neuro.funcs.grad_af = my_nn_atan_grad;
+
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "soft sign";
 
@@ -290,6 +293,7 @@ int main(int argc, char* argv[])
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     my_nn_print(&neuro);
+    my_nn_print(&cpy);
 
     my_nn_free(&neuro);
 
