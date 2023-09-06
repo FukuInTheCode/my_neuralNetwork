@@ -103,6 +103,7 @@ void my_matrix_swaprow_2(my_matrix_t *A, uint32_t const a, \
     uint32_t const b);
 void my_matrix_multiplybyscalar_2(my_matrix_t *A, double scalar);
 void my_matrix_transpose_2(my_matrix_t *A);
+double my_matrix_det(my_matrix_t *A);
 
 #ifdef MATRIX_INIT_STR
 
