@@ -185,11 +185,11 @@ int main(int argc, char* argv[])
 
     // neuro.name = "gelu";
 
-    neuro.acti_type = base_type;
-    neuro.funcs.af = my_nn_gelu;
-    neuro.funcs.grad_af = my_nn_gelu_grad;
+    // neuro.acti_type = base_type;
+    // neuro.funcs.af = my_nn_gelu;
+    // neuro.funcs.grad_af = my_nn_gelu_grad;
 
-    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
 
     // neuro.name = "idc";
