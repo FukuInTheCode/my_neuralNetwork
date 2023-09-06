@@ -45,5 +45,6 @@ uint32_t my_nn_train(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y,\
             change_gradients(nn, i, hp);
         }
     }
+    printf("%*s\n", 60, " ");
     return j;
 }

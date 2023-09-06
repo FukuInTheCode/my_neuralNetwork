@@ -99,18 +99,18 @@ int main(int argc, char* argv[])
     MAT_DECLA(targets_tr);
     MAT_DECLA(targets);
 
-    // my_matrix_create(4, 2, 1, &features_tr);
-    // my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
-    // my_matrix_create(4, 1, 1, &targets_tr);
-    // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
+    my_matrix_create(4, 2, 1, &features_tr);
+    my_matrix_fill_from_array(&features_tr, xor_train_fea, 8);
+    my_matrix_create(4, 1, 1, &targets_tr);
+    my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
 
-    my_matrix_create(25, 2, 1, &features_tr);
-    my_matrix_create(25, 1, 1, &targets_tr);
-    my_matrix_randint(10, -10, 1, &features_tr);
+    // my_matrix_create(25, 2, 1, &features_tr);
+    // my_matrix_create(25, 1, 1, &targets_tr);
+    // my_matrix_randint(10, -10, 1, &features_tr);
     // my_matrix_applyfunc(&features_tr, fun, &targets_tr);
 
-    for (uint32_t i = 0; i < targets_tr.m; ++i)
-        my_matrix_set(&targets_tr, i, 0, features_tr.arr[i][0] * features_tr.arr[i][1]);
+    // for (uint32_t i = 0; i < targets_tr.m; ++i)
+    //     my_matrix_set(&targets_tr, i, 0, features_tr.arr[i][0] * features_tr.arr[i][1]);
 
     MAT_PRINT(features_tr);
     MAT_PRINT(targets_tr);
@@ -138,12 +138,10 @@ int main(int argc, char* argv[])
 
     NN_DECLA(neuro);
 
-    neuro.size = 4;
-    uint32_t dims[] = {features.m, 2, 2, targets.m};
+    neuro.size = 3;
+    uint32_t dims[] = {features.m, 2, targets.m};
 
     neuro.dims = dims;
-
-    // neuro.name = "sin";
 
     neuro.acti_type = base_type;
     neuro.funcs.af = my_nn_sin;
@@ -151,13 +149,11 @@ int main(int argc, char* argv[])
 
     test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    // neuro.name = "atan";
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_atan;
+    neuro.funcs.grad_af = my_nn_atan_grad;
 
-    // neuro.acti_type = base_type;
-    // neuro.funcs.af = my_nn_atan;
-    // neuro.funcs.grad_af = my_nn_atan_grad;
-
-    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "soft sign";
 
