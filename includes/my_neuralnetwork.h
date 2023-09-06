@@ -42,6 +42,7 @@ typedef struct {
     double alpha;
     uint32_t epoch;
     double threshold;
+    bool show_tqdm;
 } my_params_t;
 
 void my_nn_create(my_nn_t *nn);
