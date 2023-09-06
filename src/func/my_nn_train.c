@@ -1,7 +1,9 @@
 #include "../../includes/my.h"
 
-static uint32_t my_tqdm(uint32_t total, uint32_t n)
+static uint32_t my_tqdm(uint32_t total, uint32_t n, bool show)
 {
+    if (!show)
+        return n + 1;
     double progress = (double)n / total * 100.;
     if (((int)progress)%10 != 0)
         return n + 1;
@@ -37,7 +39,7 @@ uint32_t my_nn_train(my_nn_t *nn, my_matrix_t *x, my_matrix_t *y,\
                                                     my_params_t *hp)
 {
     uint32_t j = 0;
-    for (j = 0; j < hp->epoch; j = my_tqdm(hp->epoch, j)) {
+    for (j = 0; j < hp->epoch; j = my_tqdm(hp->epoch, j, hp->show_tqdm)) {
         if (my_nn_calc_error(nn, x, y) <= hp->threshold)
             break;
         my_nn_backprogation(nn, x, y);
