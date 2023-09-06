@@ -104,9 +104,9 @@ int main(int argc, char* argv[])
     // my_matrix_create(4, 1, 1, &targets_tr);
     // my_matrix_fill_from_array(&targets_tr, xor_train_tar, 4);
 
-    my_matrix_create(25, 2, 1, &features_tr);
-    my_matrix_create(25, 1, 1, &targets_tr);
-    my_matrix_randint(10, -10, 1, &features_tr);
+    // my_matrix_create(25, 2, 1, &features_tr);
+    // my_matrix_create(25, 1, 1, &targets_tr);
+    // my_matrix_randint(10, -10, 1, &features_tr);
     // my_matrix_applyfunc(&features_tr, fun, &targets_tr);
 
     for (uint32_t i = 0; i < targets_tr.m; ++i)
@@ -143,13 +143,13 @@ int main(int argc, char* argv[])
 
     neuro.dims = dims;
 
-    // neuro.name = "sin";
+    neuro.name = "sin";
 
-    // neuro.acti_type = base_type;
-    // neuro.funcs.af = my_nn_sin;
-    // neuro.funcs.grad_af = my_nn_sin_grad;
+    neuro.acti_type = base_type;
+    neuro.funcs.af = my_nn_sin;
+    neuro.funcs.grad_af = my_nn_sin_grad;
 
-    // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
+    test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // neuro.name = "atan";
 
