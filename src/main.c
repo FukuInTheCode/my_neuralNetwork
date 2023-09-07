@@ -137,6 +137,8 @@ int main(int argc, char* argv[])
         .show_tqdm = true
     };
 
+    printf("aaa\n");
+
     NN_DECLA(neuro);
     NN_DECLA(cpy);
 
@@ -144,6 +146,8 @@ int main(int argc, char* argv[])
     uint32_t dims[] = {features.m, 2, targets.m};
 
     neuro.dims = dims;
+
+    my_nn_create(&neuro);
 
     my_nn_copy(&neuro, &cpy);
 
