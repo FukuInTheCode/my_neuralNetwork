@@ -14,6 +14,7 @@ void my_nn_to_array(my_nn_t *nn, double **res)
         my_matrix_to_array(&(nn->bias_arr[i]), &arr);
         for (uint32_t j = k; j < nn->bias_arr[i].m * nn->bias_arr[i].n; ++j)
             (*res)[j] = arr[j];
+        k += nn->bias_arr[i].m * nn->bias_arr[i].n;
         free(arr);
     }
 }

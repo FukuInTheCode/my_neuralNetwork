@@ -151,12 +151,10 @@ int main(int argc, char* argv[])
 
     my_nn_print(&neuro);
 
-    printf("%u\n", my_nn_get_n_params(&neuro));
-
-    double *arr = malloc(sizeof(double) * );
+    double *arr = malloc(sizeof(double) * my_nn_get_n_params(&neuro));
     my_nn_to_array(&neuro, &arr);
 
-    for (uint32_t i = 0; i < 6; ++i)
+    for (uint32_t i = 0; i < my_nn_get_n_params(&neuro); ++i)
         printf("%lf\n", arr[i]);
 
     // my_nn_copy(&neuro, &cpy);
