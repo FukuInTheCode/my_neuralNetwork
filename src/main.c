@@ -149,7 +149,15 @@ int main(int argc, char* argv[])
 
     my_nn_create(&neuro);
 
-    my_nn_copy(&neuro, &cpy);
+    my_nn_print(&neuro);
+
+    double *arr = malloc(sizeof(double) * 6);
+    my_nn_to_array(&neuro, &arr);
+
+    for (uint32_t i = 0; i < 6; ++i)
+        printf("%lf\n", arr[i]);
+
+    // my_nn_copy(&neuro, &cpy);
 
     // neuro.acti_type = base_type;
     // neuro.funcs.af = my_nn_sin;
