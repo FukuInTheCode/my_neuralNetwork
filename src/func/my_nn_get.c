@@ -7,4 +7,5 @@ uint32_t my_nn_get_n_params(my_nn_t *nn)
         res += nn->bias_arr[i].m * nn->bias_arr[i].n;
         res += nn->theta_arr[i].m * nn->theta_arr[i].n;
     }
+    return res;
 }
