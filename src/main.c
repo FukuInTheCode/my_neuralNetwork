@@ -304,8 +304,8 @@ int main(int argc, char* argv[])
 
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
-    my_nn_print(&neuro);
-    my_nn_print(&cpy);
+    // my_nn_print(&neuro);
+    // my_nn_print(&cpy);
 
     my_nn_free(&neuro);
 
