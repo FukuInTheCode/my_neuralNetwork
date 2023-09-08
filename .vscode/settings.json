@@ -8,7 +8,8 @@
         "my_nn_silu.C": "cpp",
         "cmath": "c",
         "limits": "c",
-        "my_nn_selu.C": "cpp"
+        "my_nn_selu.C": "cpp",
+        "my_nn_to_array.C": "cpp"
     },
     "epilinter.tokenizer_address": "ws://54.36.183.139:8081"
 }
