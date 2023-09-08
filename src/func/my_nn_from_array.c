@@ -17,6 +17,7 @@ void my_nn_from_array(my_nn_t *nn, double *arr)
             tmp_arr[j] = arr[j + k];
         my_matrix_fill_from_array(&(nn->bias_arr[i]), tmp_arr, size);
         free(tmp_arr);
+        k += size;
 
     }
 }

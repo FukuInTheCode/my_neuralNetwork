@@ -143,9 +143,11 @@ int main(int argc, char* argv[])
     NN_DECLA(cpy);
 
     neuro.size = 3;
+    cpy.size = 3;
     uint32_t dims[] = {features.m, 2, targets.m};
 
     neuro.dims = dims;
+    cpy.dims = dims;
 
     my_nn_create(&neuro);
 
@@ -156,6 +158,11 @@ int main(int argc, char* argv[])
 
     for (uint32_t i = 0; i < my_nn_get_n_params(&neuro); ++i)
         printf("%lf\n", arr[i]);
+
+    my_nn_create(&cpy);
+    my_nn_print(&cpy);
+
+    my_nn_from_array(&cpy, arr);
 
     // my_nn_copy(&neuro, &cpy);
 
@@ -305,7 +312,7 @@ int main(int argc, char* argv[])
     // test_model(&neuro, &features, &targets, &hparams, tmp_max_tar, tmp_min_tar);
 
     // my_nn_print(&neuro);
-    // my_nn_print(&cpy);
+    my_nn_print(&cpy);
 
     my_nn_free(&neuro);
 
